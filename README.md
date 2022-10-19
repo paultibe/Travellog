@@ -34,7 +34,10 @@ share with my friends and family as well.
 ## User Stories
 
 - As a user, I want to be able to add a destination to my destinations travelled.
+- As a user, I want to be able to add multiple destinations to my destinations travelled. 
 - As a user, I want to be able to determine my favourite destination.
 - As a user, I want to be able to determine my top destination in terms of food.
+- As a user, I want to be able to determine my top destination in terms of price.
+- As a user, I want to be able to determine my top destination in terms of culture.
 - As a user, I want to be able to determine which destinations I would recommend to a friend.
 - As a user, I want to be able to access all the destinations I've travelled to in my life.
