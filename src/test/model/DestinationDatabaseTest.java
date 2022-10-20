@@ -35,11 +35,9 @@ public class DestinationDatabaseTest {
     @Test
     public void addOneDestinationTest() {
         myDatabase.addDestination(D1);
-        List<TravelDestination> test = myDatabase.getDatabase();
+        List<String> test = myDatabase.getDatabase();
         assertEquals(1, test.size());
-        assertEquals(D1, test.get(0));
-        assertEquals("Vancouver", test.get(0).getCityName());
-
+        assertEquals("Vancouver", test.get(0));
     }
 
     @Test
@@ -48,12 +46,13 @@ public class DestinationDatabaseTest {
         myDatabase.addDestination(D2);
         myDatabase.addDestination(D3);
         myDatabase.addDestination(D3);
-        List<TravelDestination> test = myDatabase.getDatabase();
+        List<String> test = myDatabase.getDatabase();
         assertEquals(4, test.size());
-        assertEquals(D1, test.get(0));
-        assertEquals(D2, test.get(1));
-        assertEquals(D3, test.get(2));
-        assertEquals(D3, test.get(3));
+        assertEquals("Vancouver", test.get(0));
+        assertEquals("Paris", test.get(1));
+        assertEquals("Venice", test.get(2));
+        assertEquals("Venice", test.get(3));
+
 
     }
     @Test
@@ -71,12 +70,12 @@ public class DestinationDatabaseTest {
     }
     @Test
     public void getDatabaseTest(){
-        List<TravelDestination> test = new ArrayList<>();
+        List<String> test = new ArrayList<>();
         assertEquals(test, myDatabase.getDatabase());
         myDatabase.addDestination(D1);
         myDatabase.addDestination(D2);
-        test.add(D1);
-        test.add(D2);
+        test.add("Vancouver");
+        test.add("Paris");
         assertEquals(test, myDatabase.getDatabase());
 
     }

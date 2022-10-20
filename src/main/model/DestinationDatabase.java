@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,11 @@ public class DestinationDatabase {
             if (temp > topRating) {
                 topRating = temp;
                 result.clear();
-                result.add(d.getCityName());
+                result.add(d.getCityName()); // call helper method here. manually convert all info about the
+                                             // travel destination into a string
+                                             // call all the getter methods, add them to a string with all the info
+                                             // add that to result. thus, you still return a list of strings
+                                             // but each string in the list returns a bunch of info as well
             } else if (temp == topRating) {
                 result.add(d.getCityName());
             }
@@ -91,8 +96,12 @@ public class DestinationDatabase {
     }
 
     // EFFECTS: returns list of all destinations in database so far
-    public List<TravelDestination> getDatabase() {
-        return database;
+    public List<String> getDatabase() {
+        List<String> result = new ArrayList<>();
+        for (TravelDestination d : database) {
+            result.add(d.getCityName());
+        }
+        return result;
     }
 
     // EFFECTS: returns list of all destinations where recommendOrNot = true
