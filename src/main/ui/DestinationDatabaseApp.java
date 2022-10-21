@@ -40,7 +40,7 @@ public class DestinationDatabaseApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes destination database
+    // EFFECTS: initializes destination database and prints welcome message.
     private void initialization() {
         System.out.println("\nWelcome to Paul's travel destination database! Hope you enjoy your stay:)");
         myDatabase = new DestinationDatabase();
@@ -48,7 +48,7 @@ public class DestinationDatabaseApp {
         input.useDelimiter("\n");
     }
 
-    // EFFECTS: displays menu of options to user
+    // EFFECTS: displays menu of options to user.
     private void displayMenu() {
         System.out.println("\nWhat do you want to do?");
         System.out.println("\t1 -> add a destination");
@@ -83,7 +83,8 @@ public class DestinationDatabaseApp {
         }
     }
 
-    // NOTE: add helper functions
+    // MODIFIES: this
+    // EFFECTS: adds a destination to the database.
     private void doAddDestination() {
         System.out.println("Enter city name");
         String city = input.next();
@@ -135,7 +136,8 @@ public class DestinationDatabaseApp {
         return nextDouble;
     }
 
-    // EFFECTS: returns 
+    // EFFECTS: returns true if user would recommend destination; false otherwise.
+    //          prints a warning if input is not yes or no.
     private Boolean getRecommendationValue(String next) {
         Boolean result;
         while (!(next.equals("yes") || (next.equals("no")))) {
@@ -151,33 +153,38 @@ public class DestinationDatabaseApp {
         return result;
     }
 
-
+    // EFFECTS: prints the overall top-rated travel destination in the database.
     private void doGetFavourite() {
         List<String> favourite = myDatabase.getFavouriteDestination();
         System.out.println("Your favourite overall travel destination is: " + favourite);
     }
 
+    // EFFECTS: prints the top-rated travel destination in the database for food.
     private void doGetFavouriteFood() {
         List<String> favourite = myDatabase.getTopFoodRating();
         System.out.println("Your favourite travel destination for food is: " + favourite);
     }
 
+    // EFFECTS: prints the top-rated travel destination in the database for culture.
     private void doGetFavouriteCulture() {
         List<String> favourite = myDatabase.getTopCulturalRating();
         System.out.println("Your favourite travel destination for culture is: " + favourite);
     }
 
+    // EFFECTS: prints the top-rated travel destination in the database for price.
     private void doGetFavouritePrice() {
         List<String> favourite = myDatabase.getTopPriceRating();
         System.out.println("Your favourite travel destination for price is: " + favourite);
     }
 
+    // EFFECTS: prints database of travel destinations.
     private void doGetDatabase() {
         List<String> allDestinations = myDatabase.getDatabase();
         System.out.println("Here are all the travel destinations in the database: ");
         System.out.println(allDestinations);
     }
 
+    // EFFECTS: prints all recommended travel destinations in the database.
     private void doGetRecommendations() {
         List<String> recommendations = myDatabase.getRecommendedDestinations();
         System.out.println("Here are all your recommended travel destinations:");

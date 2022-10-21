@@ -18,11 +18,6 @@ public class DestinationDatabase {
     // EFFECTS: adds a new travel destination to the database
     public void addDestination(TravelDestination td) {
         this.database.add(td);
-
-        // (String cityName, String countryName, String continentName, double foodRating,
-        //                               double culturalRating, double priceRating, boolean recommendOrNot)
-        // cityName, countryName, continentName, foodRating, culturalRating,
-        //                priceRating, recommendOrNot))
     }
 
     // EFFECTS: returns city name of destination with top combined rating
