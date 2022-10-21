@@ -92,45 +92,65 @@ public class DestinationDatabaseApp {
         System.out.println("Enter continent name");
         String continent = input.next();
         System.out.println("How would you rate the food? (0-10)");
-        double foodRating = input.nextDouble();
-        while (!(0 <= foodRating && foodRating <= 10)) {
-            System.out.println("Hey! Can you read? Let's try that again...");
-            System.out.println("How would you rate the food? (0-10)");
-            foodRating = input.nextDouble();
-        }
+        double foodRating = getFoodRating(input.nextDouble());
         System.out.println("How would you rate the culture? (0-10)");
-        double culturalRating = input.nextDouble();
-        while (!(0 <= culturalRating && culturalRating <= 10)) {
-            System.out.println("Hey! Can you read? Let's try that again...");
-            System.out.println("How would you rate the culture? (0-10)");
-            culturalRating = input.nextDouble();
-        }
+        double culturalRating = getCulturalRating(input.nextDouble());
         System.out.println("How would you rate the price? (0-10)");
-        double priceRating = input.nextDouble();
-        while (!(0 <= priceRating && priceRating <= 10)) {
-            System.out.println("Hey! Can you read? Let's try that again...");
-            System.out.println("How would you rate the price? (0-10)");
-            priceRating = input.nextDouble();
-        }
+        double priceRating = getPriceRating(input.nextDouble());
         System.out.println("Would you recommend it, yes or no? ");
-        String temp = input.next();
-        Boolean recommendOrNot;
-        while (!(temp.equals("yes") || (temp.equals("no")))) {
-            System.out.println("Hey, seriously man... Read properly! Let's try that again...");
-            System.out.println("Would you recommend it, yes or no?");
-            temp = input.next();
-        }
-
-        if (temp == "yes") {
-            recommendOrNot = true;
-        } else {
-            recommendOrNot = false;
-        }
+        Boolean recommendOrNot = getRecommendationValue(input.next());
         System.out.println("Great! Adding your travel destination to the database...");
         TravelDestination newDestination = new TravelDestination(city, country, continent,
                 foodRating, culturalRating, priceRating, recommendOrNot);
         myDatabase.addDestination(newDestination);
     }
+
+    // EFFECTS: returns food rating, as a double, and prints a warning if input is out of specified range.
+    private double getFoodRating(double nextDouble) {
+        while (!(0 <= nextDouble && nextDouble <= 10)) {
+            System.out.println("Hey! Can you read? Let's try that again...");
+            System.out.println("How would you rate the food? (0-10)");
+            nextDouble = input.nextDouble();
+        }
+        return nextDouble;
+    }
+    
+    // EFFECTS: returns cultural rating, as a double, and prints a warning if input is out of specified range.
+    private double getCulturalRating(double nextDouble) {
+        while (!(0 <= nextDouble && nextDouble <= 10)) {
+            System.out.println("Hey! Can you read? Let's try that again...");
+            System.out.println("How would you rate the culture? (0-10)");
+            nextDouble = input.nextDouble();
+        }
+        return nextDouble;
+    }
+    
+    // EFFECTS: returns price rating, as a double, and prints a warning if input is out of specific range.
+    private double getPriceRating(double nextDouble) {
+        while (!(0 <= nextDouble && nextDouble <= 10)) {
+            System.out.println("Hey! Can you read? Let's try that again...");
+            System.out.println("How would you rate the culture? (0-10)");
+            nextDouble = input.nextDouble();
+        }
+        return nextDouble;
+    }
+
+    // EFFECTS: returns 
+    private Boolean getRecommendationValue(String next) {
+        Boolean result;
+        while (!(next.equals("yes") || (next.equals("no")))) {
+            System.out.println("Hey, seriously man... Read properly! Let's try that again...");
+            System.out.println("Would you recommend it, yes or no?");
+            next = input.next();
+        }
+        if (next.equals("yes")) {
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
+
 
     private void doGetFavourite() {
         List<String> favourite = myDatabase.getFavouriteDestination();
