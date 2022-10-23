@@ -117,11 +117,13 @@ public class DestinationDatabaseTest {
         List<String> temp = new ArrayList<>();
         temp.add("Paris");
         temp.add("Toronto");
-        assertEquals(temp, myDatabase.getTopCulturalRating());
+        List<String> test = myDatabase.getTopCulturalRating();
+        assertEquals(temp, test);
         myDatabase.addDestination(D3);
         temp.clear();
         temp.add("Venice");
-        assertEquals(temp, myDatabase.getTopCulturalRating());
+        List<String> test2 = myDatabase.getTopCulturalRating();
+        assertEquals(temp, test2);
 
     }
 
