@@ -92,6 +92,8 @@ public class DestinationDatabaseTest {
         temp.clear();
         temp.add("Paris");
         assertEquals(temp, myDatabase.getFavouriteDestination());
+        myDatabase.addDestination(D1);
+        assertEquals(temp, myDatabase.getFavouriteDestination());
     }
 
     @Test
@@ -106,6 +108,8 @@ public class DestinationDatabaseTest {
         myDatabase.addDestination(D2);
         temp.clear();
         temp.add("Paris");
+        assertEquals(temp, myDatabase.getTopFoodRating());
+        myDatabase.addDestination(D1);
         assertEquals(temp, myDatabase.getTopFoodRating());
     }
 
@@ -124,6 +128,8 @@ public class DestinationDatabaseTest {
         temp.add("Venice");
         List<String> test2 = myDatabase.getTopCulturalRating();
         assertEquals(temp, test2);
+        myDatabase.addDestination(D1);
+        assertEquals(temp, myDatabase.getTopCulturalRating());
 
     }
 
@@ -138,6 +144,8 @@ public class DestinationDatabaseTest {
         myDatabase.addDestination(D4);
         temp.clear();
         temp.add("Toronto");
+        assertEquals(temp, myDatabase.getTopPriceRating());
+        myDatabase.addDestination(D1);
         assertEquals(temp, myDatabase.getTopPriceRating());
 
     }
