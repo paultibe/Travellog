@@ -1,16 +1,20 @@
 package model;
 
-import java.sql.Array;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DestinationDatabase {
 
     private List<TravelDestination> database;
+    private String name;
 
     // EFFECTS: constructs an empty list of travel destinations
     public DestinationDatabase() {
         this.database = new ArrayList<>();
+        this.name = name;
     }
 
     // REQUIRES: foodRating, culturalRating, and priceRating >= 0
@@ -106,15 +110,32 @@ public class DestinationDatabase {
             if (d.getRecommendOrNot()) {
                 result.add((d.getCityName()));
             }
-
         }
         return result;
-
     }
 
     public int getSize() {
         return this.database.size();
 
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("database", databaseToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray databaseToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (TravelDestination t : database) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

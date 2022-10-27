@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 public class TravelDestination {
 
     private String cityName; //
@@ -51,5 +53,18 @@ public class TravelDestination {
 
     public boolean getRecommendOrNot() {
         return recommendOrNot;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("city", cityName);
+        json.put("country", countryName);
+        json.put("continent", continentName);
+        json.put("food rating", foodRating);
+        json.put("cultural rating", culturalRating);
+        json.put("price rating", priceRating);
+        json.put("recommend?", recommendOrNot);
+        return json;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // Destination database application
+// NOTE: this code is based on TellerApp: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 public class DestinationDatabaseApp {
     private DestinationDatabase myDatabase;
     private Scanner input;

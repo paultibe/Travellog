@@ -1,0 +1,22 @@
+{
+  "name": "Paul's epic database!",
+  "database": [
+    {
+      "city": "Paris",
+      "country": "France",
+      "continent": "Europe",
+      "food rating": 10,
+      "cultural rating": 8,
+      "price rating": 8,
+    },
+    {
+      "city": "Vancouver",
+      "country": "Canada",
+      "continent": "Canada",
+      "food rating": 5,
+      "cultural rating": 7,
+      "price rating": 6
+    }
+  ]
+
+}
