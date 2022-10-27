@@ -41,3 +41,5 @@ share with my friends and family as well.
 - As a user, I want to be able to determine my top destination in terms of culture.
 - As a user, I want to be able to determine which destinations I would recommend to a friend.
 - As a user, I want to be able to access all the destinations I've travelled to in my life.
+- As a user, I want to be able to save the travel destinations I have entered into the database onto a file. 
+- As a user, I want to be able to load travel destinations from a file into the database. 
