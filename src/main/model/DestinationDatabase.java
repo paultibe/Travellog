@@ -19,7 +19,6 @@ public class DestinationDatabase implements Writable {
         this.name = name;
     }
 
-    // EFFECTS: returns name of database.
     public String getName() {
         return name;
     }
@@ -133,9 +132,9 @@ public class DestinationDatabase implements Writable {
 
     public int getSize() {
         return this.database.size();
-
     }
 
+    // EFFECTS: returns a travel destination in the database as a JSON object.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -144,7 +143,7 @@ public class DestinationDatabase implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this database as a JSON array
+    // EFFECTS: returns travel destinations in this database as a JSON array
     private JSONArray databaseToJson() {
         JSONArray jsonArray = new JSONArray();
 

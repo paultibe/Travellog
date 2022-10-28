@@ -41,7 +41,8 @@ class JsonReaderTest extends JsonTest {
         JsonReader reader = new JsonReader("./data/testReaderGeneralDatabase.json");
         try {
             DestinationDatabase db = reader.read();
-            assertEquals("Paul's epic database!", db.getName());
+            db.setName("A new cool name!");
+            assertEquals("A new cool name!", db.getName());
             List<TravelDestination> database = db.getDatabase2();
             assertEquals(4,database.size());
             checkTravelDestination("Vancouver", "Canada","North America",

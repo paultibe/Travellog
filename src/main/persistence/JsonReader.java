@@ -22,7 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads database from file and returns it;
     // throws IOException if an error occurs reading data from file
     public DestinationDatabase read() throws IOException {
         String jsonData = readFile(source);
@@ -30,8 +30,9 @@ public class JsonReader {
         return parseDestinationDatabase(jsonObject);
     }
 
-    // EFFECTS: reads source file as string and returns it. Converts all the 1's and 0's to something
-    // readable to the compiler. Converts computer code to source code?
+    // EFFECTS: reads source file as string and returns it.
+    // notes: Converts all the 1's and 0's to something readable for the compiler.
+    //        Converts computer code to source code?
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -42,7 +43,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses database from JSON object and returns it
     private DestinationDatabase parseDestinationDatabase(JSONObject jsonObject) {
         String name = jsonObject.getString("name"); // gets the name of the jsonobject as a string
         DestinationDatabase db = new DestinationDatabase(name);
@@ -50,10 +51,10 @@ public class JsonReader {
         return db;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: db
+    // EFFECTS: parses travel destinations from JSON object and adds them to database
     // notes: create new array of json objects. for each json object in that array, add the thing
-    // to the workroom.
+    // to the database.
     private void addTravelDestinations(DestinationDatabase db, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("database");
         for (Object json : jsonArray) {
@@ -62,10 +63,9 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
-    // notes: get the name and category of the thing as strings from the JSONObject first
-    //        then create create the thingy and then add it to the workroom.
+    // MODIFIES: db
+    // EFFECTS: parses travel destination from JSON object and adds it to the database
+    // notes: get fields of destination, then create destination, then add it.
     private void addTravelDestination(DestinationDatabase db, JSONObject jsonObject) {
         String city = jsonObject.getString("city");
         String country = jsonObject.getString("country");
