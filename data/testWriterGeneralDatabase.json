@@ -1,22 +1,41 @@
 {
-  "name": "Paul's epic database!",
-  "database": [
-    {
-      "city": "Paris",
-      "country": "France",
-      "continent": "Europe",
-      "food rating": 10,
-      "cultural rating": 8,
-      "price rating": 8,
-    },
-    {
-      "city": "Vancouver",
-      "country": "Canada",
-      "continent": "Canada",
-      "food rating": 5,
-      "cultural rating": 7,
-      "price rating": 6
-    }
-  ]
-
+    "database": [
+        {
+            "continent": "North America",
+            "country": "Canada",
+            "city": "Vancouver",
+            "food rating": 5,
+            "cultural rating": 7,
+            "price rating": 6,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "France",
+            "city": "Paris",
+            "food rating": 10,
+            "cultural rating": 8,
+            "price rating": 8,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Italy",
+            "city": "Venice",
+            "food rating": 9,
+            "cultural rating": 9,
+            "price rating": 6,
+            "recommend?": false
+        },
+        {
+            "continent": "North America",
+            "country": "Canada",
+            "city": "Toronto",
+            "food rating": 9,
+            "cultural rating": 8,
+            "price rating": 7,
+            "recommend?": false
+        }
+    ],
+    "name": "Paul's epic database!"
 }

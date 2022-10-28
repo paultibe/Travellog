@@ -4,7 +4,7 @@
     {
       "city": "Vancouver",
       "country": "Canada",
-      "continent": "Canada",
+      "continent": "North America",
       "food rating": 5,
       "cultural rating": 7,
       "price rating": 6,
@@ -26,7 +26,7 @@
       "food rating": 9,
       "cultural rating": 9,
       "price rating": 6,
-      "recommend?": true
+      "recommend?": false
     },
     {
       "city": "Toronto",
@@ -35,7 +35,7 @@
       "food rating": 9,
       "cultural rating": 8,
       "price rating": 7,
-      "recommend?": true
+      "recommend?": false
     }
   ]
 

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DestinationDatabase implements Writable {
@@ -18,8 +19,15 @@ public class DestinationDatabase implements Writable {
         this.name = name;
     }
 
+    // EFFECTS: returns name of database.
     public String getName() {
         return name;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets name of database.
+    public void setName(String name) {
+        this.name = name;
     }
 
     // REQUIRES: foodRating, culturalRating, and priceRating >= 0
@@ -106,6 +114,10 @@ public class DestinationDatabase implements Writable {
             result.add(d.getCityName());
         }
         return result;
+    }
+
+    public List<TravelDestination> getDatabase2() {
+        return Collections.unmodifiableList(database);
     }
 
     // EFFECTS: returns list of all destinations where recommendOrNot = true

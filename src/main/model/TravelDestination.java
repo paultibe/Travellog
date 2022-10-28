@@ -31,14 +31,13 @@ public class TravelDestination implements Writable {
         return cityName;
     }
 
-// NOTE: may change code in the future and need these getters.
-//    public String getCountryName() {
-//        return countryName;
-//    }
-//
-//    public String getContinentName() {
-//        return continentName;
-//    }
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public String getContinentName() {
+        return continentName;
+    }
 
     public double getFoodRating() {
         return foodRating;

@@ -210,6 +210,8 @@ public class DestinationDatabaseApp {
 
     // EFFECTS: saves the database to file
     private void saveDatabase() {
+        System.out.println("What is your database's name?");
+        myDatabase.setName(input.next());
         try {
             jsonWriter.open();
             jsonWriter.write(myDatabase);
