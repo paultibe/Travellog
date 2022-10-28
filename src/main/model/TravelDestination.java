@@ -1,8 +1,9 @@
 package model;
 
 import org.json.JSONObject;
+import persistence.Writable;
 
-public class TravelDestination {
+public class TravelDestination implements Writable {
 
     private String cityName; //
     private String countryName; //

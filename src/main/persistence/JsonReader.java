@@ -45,7 +45,7 @@ public class JsonReader {
     // EFFECTS: parses workroom from JSON object and returns it
     private DestinationDatabase parseDestinationDatabase(JSONObject jsonObject) {
         String name = jsonObject.getString("name"); // gets the name of the jsonobject as a string
-        DestinationDatabase db = new DestinationDatabase();
+        DestinationDatabase db = new DestinationDatabase(name);
         addTravelDestinations(db, jsonObject);
         return db;
     }

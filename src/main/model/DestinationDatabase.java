@@ -2,19 +2,24 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DestinationDatabase {
+public class DestinationDatabase implements Writable {
 
     private List<TravelDestination> database;
     private String name;
 
     // EFFECTS: constructs an empty list of travel destinations
-    public DestinationDatabase() {
+    public DestinationDatabase(String name) {
         this.database = new ArrayList<>();
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     // REQUIRES: foodRating, culturalRating, and priceRating >= 0
@@ -127,7 +132,7 @@ public class DestinationDatabase {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns things in this database as a JSON array
     private JSONArray databaseToJson() {
         JSONArray jsonArray = new JSONArray();
 

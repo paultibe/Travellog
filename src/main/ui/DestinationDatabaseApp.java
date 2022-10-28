@@ -2,7 +2,12 @@ package ui;
 
 import model.DestinationDatabase;
 import model.TravelDestination;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,9 +16,12 @@ import java.util.Scanner;
 public class DestinationDatabaseApp {
     private DestinationDatabase myDatabase;
     private Scanner input;
+    private static final String JSON_STORE = "./data/database.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the destination database application
-    public DestinationDatabaseApp() {
+    public DestinationDatabaseApp() throws FileNotFoundException {
         runDestinationDatabase();
     }
 
@@ -44,9 +52,11 @@ public class DestinationDatabaseApp {
     // EFFECTS: initializes destination database and prints welcome message.
     private void initialization() {
         System.out.println("\nWelcome to Paul's travel destination database! Hope you enjoy your stay:)");
-        myDatabase = new DestinationDatabase();
+        myDatabase = new DestinationDatabase("Paul's database");
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu of options to user.
@@ -59,6 +69,8 @@ public class DestinationDatabaseApp {
         System.out.println("\t5 -> get your favourite destination for price");
         System.out.println("\t6 -> get all destinations you recommend");
         System.out.println("\t7 -> view all your destinations");
+        System.out.println("\t8 -> save database to file");
+        System.out.println("\t9 -> load database from file");
         System.out.println("\tq -> quit");
     }
 
@@ -79,6 +91,10 @@ public class DestinationDatabaseApp {
             doGetRecommendations();
         } else if (command.equals("7")) {
             doGetDatabase();
+        } else if (command.equals("8")) {
+            saveDatabase();
+        } else if (command.equals("9")) {
+            loadDatabase();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -192,4 +208,26 @@ public class DestinationDatabaseApp {
         System.out.println(recommendations);
     }
 
+    // EFFECTS: saves the database to file
+    private void saveDatabase() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myDatabase);
+            jsonWriter.close();
+            System.out.println("Saved " + myDatabase.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads database from file
+    private void loadDatabase() {
+        try {
+            myDatabase = jsonReader.read();
+            System.out.println("Loaded " + myDatabase.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }

@@ -23,7 +23,7 @@ public class DestinationDatabaseTest {
 
     @BeforeEach
     public void setup(){
-        myDatabase = new DestinationDatabase();
+        myDatabase = new DestinationDatabase("Paul's Database");
 
     }
 
