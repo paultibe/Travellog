@@ -5,7 +5,6 @@ import model.TravelDestination;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -16,9 +15,11 @@ import java.util.Scanner;
 public class DestinationDatabaseApp {
     private DestinationDatabase myDatabase;
     private Scanner input;
-    private static final String JSON_STORE = "./data/database.json";
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private String name;
+    //private String jsonStore;
+
+    //private JsonWriter jsonWriter;
+    //private JsonReader jsonReader;
 
     // EFFECTS: runs the destination database application
     public DestinationDatabaseApp() throws FileNotFoundException {
@@ -52,11 +53,14 @@ public class DestinationDatabaseApp {
     // EFFECTS: initializes destination database and prints welcome message.
     private void initialization() {
         System.out.println("\nWelcome to Paul's travel destination database! Hope you enjoy your stay:)");
-        myDatabase = new DestinationDatabase("Paul's database");
+        //System.out.println("\nWhat will you name your database?");
         input = new Scanner(System.in);
+        //name = input.next();
+        myDatabase = new DestinationDatabase("Temporary");
+        //jsonStore = "./data/" + name + ".json";
         input.useDelimiter("\n");
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
+        //jsonWriter = new JsonWriter(jsonStore);
+        //jsonReader = new JsonReader(jsonStore);
     }
 
     // EFFECTS: displays menu of options to user.
@@ -211,25 +215,38 @@ public class DestinationDatabaseApp {
     // EFFECTS: saves the database to file
     private void saveDatabase() {
         System.out.println("What is your database's name?");
-        myDatabase.setName(input.next());
+        String filename = input.nextLine();
+        while (filename.equals("")) {
+            filename = input.nextLine();
+        }
+        String filename2 = filename.replace(" ","");
+        myDatabase.setName(filename2);
+        String jsonStore = "./data/" + filename2 + ".json";
         try {
+            JsonWriter jsonWriter = new JsonWriter(jsonStore);
             jsonWriter.open();
             jsonWriter.write(myDatabase);
             jsonWriter.close();
-            System.out.println("Saved " + myDatabase.getName() + " to " + JSON_STORE);
+            System.out.println("Saved " + myDatabase.getName() + " to " + jsonStore);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            System.out.println("Unable to write to file: " + jsonStore);
         }
     }
 
     // MODIFIES: this
     // EFFECTS: loads database from file
     private void loadDatabase() {
+        System.out.println("What is your database's name?");
+        String filename = input.next();
+        String filename2 = filename.replace(" ","");
+        myDatabase.setName(filename2);
+        String jsonStore = "./data/" + filename2 + ".json";
         try {
+            JsonReader jsonReader = new JsonReader(jsonStore);
             myDatabase = jsonReader.read();
-            System.out.println("Loaded " + myDatabase.getName() + " from " + JSON_STORE);
+            System.out.println("Loaded " + myDatabase.getName() + " from " + jsonStore);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to read from file: " + jsonStore);
         }
     }
 }
