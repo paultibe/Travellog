@@ -43,3 +43,20 @@ share with my friends and family as well.
 - As a user, I want to be able to access all the destinations I've travelled to in my life.
 - As a user, I want to be able to save the travel destinations I have entered into the database onto a file. 
 - As a user, I want to be able to load travel destinations from a file into the database. 
+
+# Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by clicking the "Add a Destination" button.
+  - Then, in the pop-up window, enter all fields and click the "submit" button when done.
+- You can generate the second required event related to adding Xs to a Y by clicking the "View your Destinations" button.
+  - This will open a new pop-up with all destinations printed.
+- You can locate my visual component by looking at the recommended travel destination at the bottom of the GUI.
+- You can save the state of my application by clicking the "Save Your Database" button and then entering the name of
+  - your database in the pop-up pane and clicking "ok".
+- You can reload the state of my application by clicking the "Load a Database" button and entering the name of your
+  - database in the pop-up pane and clicking "ok".
+
+
+where to find the visual component that was added to your project (e.g., background image, image added to button)
+how does the user save the state of the application to file
+how does the user load the state of the application from file
