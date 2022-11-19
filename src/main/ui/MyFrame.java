@@ -20,6 +20,8 @@ public class MyFrame extends JFrame implements ActionListener {
     //JLabel label;
     MyFrame() {
 
+        database = new DestinationDatabase("Name");
+
         this.setTitle("Destination Database Application!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close
         this.setResizable(true);
@@ -135,13 +137,11 @@ public class MyFrame extends JFrame implements ActionListener {
             // add functionality to close upon adding.
         } else if (e.getSource() == viewButton) {
             doGetDatabase(database);
-            JOptionPane.showMessageDialog(this, "Add other info here.");
         }
     }
 
     private void doAddDestination() {
-        AddDestination myAdd = new AddDestination();
-        database.addDestination(myAdd.getTravelDestination());
+        AddDestination myAdd = new AddDestination(this.database);
     }
 
     private void doGetDatabase(DestinationDatabase database) {

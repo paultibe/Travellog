@@ -1,11 +1,13 @@
 package ui;
 
+import model.DestinationDatabase;
 import model.TravelDestination;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 // add submit button with an action listener. This action listener creates the new TravelDestination with all the input
 
 public class AddDestination implements ActionListener {
@@ -28,7 +30,10 @@ public class AddDestination implements ActionListener {
     JButton button = new JButton("Submit");
     TravelDestination newDestination;
 
-    AddDestination() {
+    DestinationDatabase database;
+
+    AddDestination(DestinationDatabase database) {
+        this.database = database;
 
         frame.setSize(600,400);
         frame.setLayout(new GridLayout(8,2,10,10));
@@ -65,9 +70,10 @@ public class AddDestination implements ActionListener {
             boolean recommendOrNot = Boolean.parseBoolean(enterRecommendOrNot.getText());
             newDestination = new TravelDestination(city, country, continent,
                     foodRating, culturalRating, priceRating, recommendOrNot);
-//            myDatabase.addDestination(newDestination);
+            this.database.addDestination(newDestination);
             JOptionPane.showMessageDialog(null,
                     "Great! Adding your travel destination to the database...");
+            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }
 

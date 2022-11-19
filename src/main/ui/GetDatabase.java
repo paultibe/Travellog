@@ -1,11 +1,9 @@
 package ui;
 
 import model.DestinationDatabase;
-import model.TravelDestination;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 // add submit button with an action listener. This action listener creates the new TravelDestination with all the input
 
@@ -19,13 +17,11 @@ public class GetDatabase {
         this.database = database;
 
         frame.setSize(600, 400);
-        frame.setLayout(new GridLayout(8, 2, 10, 10));
-
-        List<String> result = new ArrayList<>();
-        for (TravelDestination d : this.database) {
-            result.add(d.getCityName());
+        frame.setLayout(new GridLayout(8, 1, 10, 10));
+        List<String> allDestinations = database.getDatabase();
+        for (String s : allDestinations) {
+            frame.add(new JLabel(s));
         }
-
         frame.setVisible(true);
     }
 }
