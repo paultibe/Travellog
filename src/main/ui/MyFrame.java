@@ -21,7 +21,6 @@ public class MyFrame extends JFrame implements ActionListener {
     JButton favouriteButton;
     JButton recommendedButton;
 
-    //JLabel label;
     MyFrame() {
 
         database = new DestinationDatabase("Name");
@@ -47,7 +46,8 @@ public class MyFrame extends JFrame implements ActionListener {
         this.setVisible(true);
 
     }
-
+    // MODIFIES: this
+    // EFFECTS: Adds the top, introductory string of text to the frame.
     public JLabel addTopLabel() {
         JLabel topLabel = new JLabel(); //create a label
         topLabel.setText("Welcome to the epic travel destination database! Enjoy your stay!");
@@ -66,9 +66,8 @@ public class MyFrame extends JFrame implements ActionListener {
 
     }
 
-    // ADDING THE PANEL WITH THE SET OF BUTTONS. Add buttons to panel. Add panel to frame. use grid layout
-    // and add spacing
-    // make sure to set preferred size (copy code).
+    // MODIFIES: this
+    // EFFECTS: adds the center panel with the buttons to the frame.
     public JPanel addCenterPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.lightGray);
@@ -100,6 +99,7 @@ public class MyFrame extends JFrame implements ActionListener {
         return mainPanel;
     }
 
+    // EFFECTS: creates a generic button with font set to Gotham and size set to 20, 20 (x and y).
     public JButton addButton(String title) {
         JButton button = new JButton(title);
         button.setFont(new Font("Gotham", Font.BOLD, 25));
@@ -110,7 +110,8 @@ public class MyFrame extends JFrame implements ActionListener {
         return button;
     }
 
-    // CREATING THE VISUAL COMPONENT
+    //MODIFIES: this
+    //EFFECTS: adds the recommended destinations to the bottom of frame.
     public JLabel addVisualComponent() {
         JLabel label = new JLabel(); //create a label
         label.setText("Suggested future travel destination, based on our users' favourite destinations: Madrid, Spain");
@@ -136,6 +137,7 @@ public class MyFrame extends JFrame implements ActionListener {
         return label;
     }
 
+    // EFFECTS: determines which action to do depending on which button is clicked.
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
@@ -149,14 +151,18 @@ public class MyFrame extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: database
+    // EFFECTS: Creates a new pop-up window with prompts for each component of a travel destination.
     private void doAddDestination() {
         AddDestination myAdd = new AddDestination(this.database);
     }
 
+    // EFFECTS: prints out all travel destinations in a new pop-up window.
     private void doGetDatabase(DestinationDatabase database) {
         GetDatabase myGet = new GetDatabase(database);
     }
 
+    // EFFECTS: saves the database to file
     private void saveDatabase() {
         String filename2 = JOptionPane.showInputDialog("What is your database's name?: ");
         database.setName(filename2);
@@ -173,6 +179,8 @@ public class MyFrame extends JFrame implements ActionListener {
         }
     }
 
+    // MODIFIES: database
+    // EFFECTS: loads database from file
     private void loadDatabase() {
         String filename = JOptionPane.showInputDialog("What is your database's name?: ");
         String filename2 = filename.replace(" ","");

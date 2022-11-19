@@ -35,8 +35,8 @@ public class AddDestination implements ActionListener {
     AddDestination(DestinationDatabase database) {
         this.database = database;
 
-        frame.setSize(600,400);
-        frame.setLayout(new GridLayout(8,2,10,10));
+        frame.setSize(600, 400);
+        frame.setLayout(new GridLayout(8, 2, 10, 10));
 
         frame.add(cityLabel);
         frame.add(enterCity);
@@ -76,12 +76,8 @@ public class AddDestination implements ActionListener {
             frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }
-
-    public TravelDestination getTravelDestination() {
-        return newDestination;
-    }
-
-    // action listener method creates the new travel destination, prints out the "congrats!" text
-    // you need a Travel Destination within this class. Then a method to get that destination. You call that
-    // method in MyFrame and then add that to the database.
 }
+
+//    public TravelDestination getTravelDestination() {
+//        return newDestination;
+//    }
