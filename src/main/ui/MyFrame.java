@@ -1,11 +1,15 @@
 package ui;
 
 import model.DestinationDatabase;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MyFrame extends JFrame implements ActionListener {
 
@@ -80,9 +84,11 @@ public class MyFrame extends JFrame implements ActionListener {
 
         loadButton = addButton("Load a database");
         mainPanel.add(loadButton);
+        loadButton.addActionListener(this);
 
         saveButton = addButton("Save your database");
         mainPanel.add(saveButton);
+        saveButton.addActionListener(this);
 
         favouriteButton = addButton("View your favourite destination");
         mainPanel.add(favouriteButton);
@@ -134,9 +140,12 @@ public class MyFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
             doAddDestination();
-            // add functionality to close upon adding.
         } else if (e.getSource() == viewButton) {
             doGetDatabase(database);
+        } else if (e.getSource() == saveButton) {
+            saveDatabase();
+        } else if (e.getSource() == loadButton) {
+            loadDatabase();
         }
     }
 
@@ -146,7 +155,37 @@ public class MyFrame extends JFrame implements ActionListener {
 
     private void doGetDatabase(DestinationDatabase database) {
         GetDatabase myGet = new GetDatabase(database);
+    }
 
+    private void saveDatabase() {
+        String filename2 = JOptionPane.showInputDialog("What is your database's name?: ");
+        database.setName(filename2);
+        String jsonStore = "./data/" + filename2 + ".json";
+        try {
+            JsonWriter jsonWriter = new JsonWriter(jsonStore);
+            jsonWriter.open();
+            jsonWriter.write(database);
+            jsonWriter.close();
+            JOptionPane.showMessageDialog(this,
+                    "Saved " + database.getName() + " to " + jsonStore);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + jsonStore);
+        }
+    }
+
+    private void loadDatabase() {
+        String filename = JOptionPane.showInputDialog("What is your database's name?: ");
+        String filename2 = filename.replace(" ","");
+        database.setName(filename2);
+        String jsonStore = "./data/" + filename2 + ".json";
+        try {
+            JsonReader jsonReader = new JsonReader(jsonStore);
+            database = jsonReader.read();
+            JOptionPane.showMessageDialog(this,
+                    "Loaded " + database.getName() + " from " + jsonStore);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + jsonStore);
+        }
     }
 }
 
