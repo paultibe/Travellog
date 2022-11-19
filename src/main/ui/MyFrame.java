@@ -48,6 +48,7 @@ public class MyFrame extends JFrame implements ActionListener {
     }
     // MODIFIES: this
     // EFFECTS: Adds the top, introductory string of text to the frame.
+
     public JLabel addTopLabel() {
         JLabel topLabel = new JLabel(); //create a label
         topLabel.setText("Welcome to the epic travel destination database! Enjoy your stay!");
