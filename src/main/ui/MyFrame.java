@@ -71,43 +71,36 @@ public class MyFrame extends JFrame implements ActionListener {
     // EFFECTS: adds the center panel with the buttons to the frame.
     public JPanel addCenterPanel() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(Color.lightGray);
-        mainPanel.setLayout(new GridLayout(3, 2, 3, 3));
-
-        addButton = addButton("Add a destination");
-        addButton.addActionListener(this);
-        mainPanel.add(addButton);
-
-        viewButton = addButton("View your destinations");
-        viewButton.addActionListener(this);
-        mainPanel.add(viewButton);
-
-        loadButton = addButton("Load a database");
-        mainPanel.add(loadButton);
-        loadButton.addActionListener(this);
-
-        saveButton = addButton("Save your database");
-        mainPanel.add(saveButton);
-        saveButton.addActionListener(this);
-
-        favouriteButton = addButton("View your favourite destination");
-        mainPanel.add(favouriteButton);
-
-        recommendedButton = addButton("View your recommended destinations");
-        mainPanel.add(recommendedButton);
-
-        mainPanel.setPreferredSize(new Dimension(50, 50));
+        GridBagConstraints gbc = new GridBagConstraints();
+        mainPanel.setBackground(new Color(0xECECCA));
+        mainPanel.setLayout(new GridBagLayout());
+        addButton = addButton("Add", 0, 0, gbc, mainPanel);
+        viewButton = addButton("View", 1, 0, gbc, mainPanel);
+        loadButton = addButton("Load", 0, 1, gbc, mainPanel);
+        saveButton = addButton("Save", 1, 1, gbc, mainPanel);
+        favouriteButton = addButton("Favourite",3,0, gbc, mainPanel);
+        recommendedButton = addButton("Recommended",3,1, gbc, mainPanel);
+        //mainPanel.setPreferredSize(new Dimension(200, 200));
         return mainPanel;
     }
 
+    public GridBagConstraints setGbc(GridBagConstraints gbc, int x, int y) {
+        gbc.gridx = x;
+        gbc.gridy = y;
+        return gbc;
+    }
+
     // EFFECTS: creates a generic button with font set to Gotham and size set to 20, 20 (x and y).
-    public JButton addButton(String title) {
+    public JButton addButton(String title, int x, int y, GridBagConstraints gbc, JPanel mainPanel) {
         JButton button = new JButton(title);
-        button.setFont(new Font("Gotham", Font.BOLD, 25));
-        button.setPreferredSize(new Dimension(20, 20));
+        button.setFont(new Font("Gotham", Font.BOLD, 15));
+        button.setPreferredSize(new Dimension(200, 50));
         button.setBorder(BorderFactory.createEtchedBorder());
         // button.setForeground(new Color(0x15399B));
         button.setBackground(Color.lightGray);
+        button.addActionListener(this);
+        setGbc(gbc, x, y);
+        mainPanel.add(button, gbc);
         return button;
     }
 
