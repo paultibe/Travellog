@@ -29,19 +29,24 @@ public class MyFrame extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close
         this.setResizable(true);
         this.setSize(1280, 720);
-        this.setLayout(new GridLayout(3, 1, 10, 10));
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10,10,10,10);
         ImageIcon image = new ImageIcon("plane.png");
         this.setIconImage(image.getImage());
         this.getContentPane().setBackground(new Color(0xECECCA));
 
         JLabel toplabel = addTopLabel();
-        this.add(toplabel);
+        setGbc(gbc, 0,0);
+        this.add(toplabel, gbc);
 
         JPanel centerPanel = addCenterPanel();
-        this.add(centerPanel);
+        setGbc(gbc, 0,1);
+        this.add(centerPanel, gbc);
 
         JLabel bottomLabel = addVisualComponent();
-        this.add(bottomLabel);
+        setGbc(gbc, 0, 2);
+        this.add(bottomLabel, gbc);
 
         this.setVisible(true);
 
