@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -58,7 +59,17 @@ public class MyFrame extends JFrame implements ActionListener {
         JLabel topLabel = new JLabel(); //create a label
         topLabel.setText("Welcome to the epic travel destination database! Enjoy your stay!");
         topLabel.setForeground(new Color(0x15399B)); //set font color of text
-        topLabel.setFont(new Font("Gotham", Font.BOLD, 30));
+        Font gotham;
+        try {
+            gotham = Font.createFont(Font.TRUETYPE_FONT, new File("GothamBold.ttf")).deriveFont(30f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("GothamBold.ttf")));
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        topLabel.setFont(gotham);
         // label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
         // label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
         //label.setIconTextGap(10); //set gap of text to image
