@@ -1,0 +1,23 @@
+{
+    "database": [
+        {
+            "continent": "2",
+            "country": "2",
+            "city": "1",
+            "food rating": 2,
+            "cultural rating": 2,
+            "price rating": 2,
+            "recommend?": false
+        },
+        {
+            "continent": "tes",
+            "country": "test",
+            "city": "test",
+            "food rating": 2,
+            "cultural rating": 4,
+            "price rating": 7,
+            "recommend?": true
+        }
+    ],
+    "name": "DummyTest"
+}

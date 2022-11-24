@@ -1,0 +1,172 @@
+Index: src/main/ui/GetDatabase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport model.DestinationDatabase;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.List;\r\n// add submit button with an action listener. This action listener creates the new TravelDestination with all the input\r\n\r\npublic class GetDatabase {\r\n\r\n    JFrame frame = new JFrame();\r\n    DestinationDatabase database;\r\n\r\n    GetDatabase(DestinationDatabase database) {\r\n\r\n        this.database = database;\r\n\r\n        frame.setSize(600, 400);\r\n        frame.setLayout(new GridLayout(8, 1, 10, 10));\r\n        List<String> allDestinations = database.getDatabase();\r\n        for (String s : allDestinations) {\r\n            frame.add(new JLabel(s));\r\n        }\r\n        frame.setVisible(true);\r\n    }\r\n}\r\n\r\n//    @Override\r\n//    public void actionPerformed(ActionEvent e) {\r\n//        if (e.getSource() == button) {\r\n//            String city = enterCity.getText();\r\n//            String country = enterCountry.getText();\r\n//            String continent = enterContinent.getText();\r\n//            double foodRating = Double.parseDouble(enterFoodRating.getText());\r\n//            double culturalRating = Double.parseDouble(enterCulturalRating.getText());\r\n//            double priceRating = Double.parseDouble(enterPriceRating.getText());\r\n//            boolean recommendOrNot = Boolean.parseBoolean(enterRecommendOrNot.getText());\r\n//            newDestination = new TravelDestination(city, country, continent,\r\n//                    foodRating, culturalRating, priceRating, recommendOrNot);\r\n////            myDatabase.addDestination(newDestination);\r\n//            JOptionPane.showMessageDialog(null,\r\n//                    \"Great! Adding your travel destination to the database...\");\r\n//        }\r\n//    }\r\n\r\n//    public TravelDestination getTravelDestination() {\r\n//        return newDestination;\r\n//    }\r\n\r\n    // action listener method creates the new travel destination, prints out the \"congrats!\" text\r\n    // you need a Travel Destination within this class. Then a method to get that destination. You call that\r\n    // method in MyFrame and then add that to the database.\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/ui/GetDatabase.java b/src/main/ui/GetDatabase.java
+--- a/src/main/ui/GetDatabase.java	(revision 52cc0a2c13c142a194477e46f6f684bf00e6d170)
++++ b/src/main/ui/GetDatabase.java	(date 1669322723988)
+@@ -16,11 +16,26 @@
+ 
+         this.database = database;
+ 
+-        frame.setSize(600, 400);
+-        frame.setLayout(new GridLayout(8, 1, 10, 10));
++        frame.setSize(300, 400);
++        frame.setLayout(new GridLayout(10, 1, 10, 10));
+         List<String> allDestinations = database.getDatabase();
+         for (String s : allDestinations) {
+-            frame.add(new JLabel(s));
++//            JLabel label = new JLabel(s);
++//            label.setForeground(new Color(0x15399B)); //set font color of text
++//            label.setBackground(new Color(0xECECCA));
++//            label.setFont(new Font("Gotham", Font.BOLD, 15));
++//            label.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
++//            label.setHorizontalAlignment(JLabel.CENTER);
++            JButton button = new JButton(s);
++            button.setFont(new Font("Gotham", Font.BOLD, 20));
++            button.setPreferredSize(new Dimension(20, 20));
++            button.setBorder(BorderFactory.createEtchedBorder());
++            button.setForeground(new Color(0x15399B));
++            button.setBackground(new Color(0xECECCA));
++            //button.setBorder(new RoundedBorder(10));
++            button.setEnabled(true);
++            // addBtn. setBorder(new RoundedBorder(10))
++            frame.add(button);
+         }
+         frame.setVisible(true);
+     }
+Index: src/main/ui/MyFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\r\n\r\nimport model.DestinationDatabase;\r\nimport persistence.JsonReader;\r\nimport persistence.JsonWriter;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.IOException;\r\n\r\npublic class MyFrame extends JFrame implements ActionListener {\r\n\r\n    DestinationDatabase database;\r\n    JButton addButton;\r\n    JButton viewButton;\r\n    JButton saveButton;\r\n    JButton loadButton;\r\n    JButton favouriteButton;\r\n    JButton recommendedButton;\r\n\r\n    MyFrame() {\r\n\r\n        database = new DestinationDatabase(\"Name\");\r\n\r\n        this.setTitle(\"Destination Database Application!\");\r\n        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close\r\n        this.setResizable(true);\r\n        this.setSize(1280, 720);\r\n        this.setLayout(new GridLayout(3, 1, 10, 10));\r\n        ImageIcon image = new ImageIcon(\"plane.png\");\r\n        this.setIconImage(image.getImage());\r\n        this.getContentPane().setBackground(new Color(0xECECCA));\r\n\r\n        JLabel toplabel = addTopLabel();\r\n        this.add(toplabel);\r\n\r\n        JPanel centerPanel = addCenterPanel();\r\n        this.add(centerPanel);\r\n\r\n        JLabel bottomLabel = addVisualComponent();\r\n        this.add(bottomLabel);\r\n\r\n        this.setVisible(true);\r\n\r\n    }\r\n    // MODIFIES: this\r\n    // EFFECTS: Adds the top, introductory string of text to the frame.\r\n\r\n    public JLabel addTopLabel() {\r\n        JLabel topLabel = new JLabel(); //create a label\r\n        topLabel.setText(\"Welcome to the epic travel destination database! Enjoy your stay!\");\r\n        topLabel.setForeground(new Color(0x15399B)); //set font color of text\r\n        topLabel.setFont(new Font(\"Gotham\", Font.BOLD, 30));\r\n        // label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon\r\n        // label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon\r\n        //label.setIconTextGap(10); //set gap of text to image\r\n        // label.setBackground(new Color(0xC27A34)); //set background color\r\n        // label.setOpaque(true); //display background color\r\n        //label.setBorder(border); //sets border of label (not image+text)\r\n        topLabel.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label\r\n        topLabel.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label\r\n        //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions\r\n        return topLabel;\r\n\r\n    }\r\n\r\n    // MODIFIES: this\r\n    // EFFECTS: adds the center panel with the buttons to the frame.\r\n    public JPanel addCenterPanel() {\r\n        JPanel mainPanel = new JPanel();\r\n        mainPanel.setBackground(Color.lightGray);\r\n        mainPanel.setLayout(new GridLayout(3, 2, 3, 3));\r\n\r\n        addButton = addButton(\"Add a destination\");\r\n        addButton.addActionListener(this);\r\n        mainPanel.add(addButton);\r\n\r\n        viewButton = addButton(\"View your destinations\");\r\n        viewButton.addActionListener(this);\r\n        mainPanel.add(viewButton);\r\n\r\n        loadButton = addButton(\"Load a database\");\r\n        mainPanel.add(loadButton);\r\n        loadButton.addActionListener(this);\r\n\r\n        saveButton = addButton(\"Save your database\");\r\n        mainPanel.add(saveButton);\r\n        saveButton.addActionListener(this);\r\n\r\n        favouriteButton = addButton(\"View your favourite destination\");\r\n        mainPanel.add(favouriteButton);\r\n\r\n        recommendedButton = addButton(\"View your recommended destinations\");\r\n        mainPanel.add(recommendedButton);\r\n\r\n        mainPanel.setPreferredSize(new Dimension(50, 50));\r\n        return mainPanel;\r\n    }\r\n\r\n    // EFFECTS: creates a generic button with font set to Gotham and size set to 20, 20 (x and y).\r\n    public JButton addButton(String title) {\r\n        JButton button = new JButton(title);\r\n        button.setFont(new Font(\"Gotham\", Font.BOLD, 25));\r\n        button.setPreferredSize(new Dimension(20, 20));\r\n        button.setBorder(BorderFactory.createEtchedBorder());\r\n        // button.setForeground(new Color(0x15399B));\r\n        button.setBackground(Color.lightGray);\r\n        return button;\r\n    }\r\n\r\n    //MODIFIES: this\r\n    //EFFECTS: adds the recommended destinations to the bottom of frame.\r\n    public JLabel addVisualComponent() {\r\n        JLabel label = new JLabel(); //create a label\r\n        label.setText(\"Suggested future travel destination, based on our users' favourite destinations: Madrid, Spain\");\r\n        label.setForeground(new Color(0x15399B)); //set font color of text\r\n        label.setFont(new Font(\"Gotham\", Font.BOLD, 15));\r\n\r\n        ImageIcon madrid = new ImageIcon(\"Madrid.jpeg\");\r\n        Image transformed = madrid.getImage(); // transform it\r\n        Image newimg = transformed.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);\r\n        // scale it the smooth way\r\n        madrid = new ImageIcon(newimg);  // transform it back\r\n\r\n        label.setIcon(madrid);\r\n        label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon\r\n        label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon\r\n        label.setIconTextGap(10); //set gap of text to image\r\n        // label.setBackground(new Color(0xC27A34)); //set background color\r\n        // label.setOpaque(true); //display background color\r\n        //label.setBorder(border); //sets border of label (not image+text)\r\n        label.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label\r\n        label.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label\r\n        //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions\r\n        return label;\r\n    }\r\n\r\n    // EFFECTS: determines which action to do depending on which button is clicked.\r\n    @Override\r\n    public void actionPerformed(ActionEvent e) {\r\n        if (e.getSource() == addButton) {\r\n            doAddDestination();\r\n        } else if (e.getSource() == viewButton) {\r\n            doGetDatabase(database);\r\n        } else if (e.getSource() == saveButton) {\r\n            saveDatabase();\r\n        } else if (e.getSource() == loadButton) {\r\n            loadDatabase();\r\n        }\r\n    }\r\n\r\n    // MODIFIES: database\r\n    // EFFECTS: Creates a new pop-up window with prompts for each component of a travel destination.\r\n    private void doAddDestination() {\r\n        AddDestination myAdd = new AddDestination(this.database);\r\n    }\r\n\r\n    // EFFECTS: prints out all travel destinations in a new pop-up window.\r\n    private void doGetDatabase(DestinationDatabase database) {\r\n        GetDatabase myGet = new GetDatabase(database);\r\n    }\r\n\r\n    // EFFECTS: saves the database to file\r\n    private void saveDatabase() {\r\n        String filename2 = JOptionPane.showInputDialog(\"What is your database's name?: \");\r\n        database.setName(filename2);\r\n        String jsonStore = \"./data/\" + filename2 + \".json\";\r\n        try {\r\n            JsonWriter jsonWriter = new JsonWriter(jsonStore);\r\n            jsonWriter.open();\r\n            jsonWriter.write(database);\r\n            jsonWriter.close();\r\n            JOptionPane.showMessageDialog(this,\r\n                    \"Saved \" + database.getName() + \" to \" + jsonStore);\r\n        } catch (FileNotFoundException e) {\r\n            System.out.println(\"Unable to write to file: \" + jsonStore);\r\n        }\r\n    }\r\n\r\n    // MODIFIES: database\r\n    // EFFECTS: loads database from file\r\n    private void loadDatabase() {\r\n        String filename = JOptionPane.showInputDialog(\"What is your database's name?: \");\r\n        String filename2 = filename.replace(\" \",\"\");\r\n        database.setName(filename2);\r\n        String jsonStore = \"./data/\" + filename2 + \".json\";\r\n        try {\r\n            JsonReader jsonReader = new JsonReader(jsonStore);\r\n            database = jsonReader.read();\r\n            JOptionPane.showMessageDialog(this,\r\n                    \"Loaded \" + database.getName() + \" from \" + jsonStore);\r\n        } catch (IOException e) {\r\n            System.out.println(\"Unable to read from file: \" + jsonStore);\r\n        }\r\n    }\r\n}\r\n\r\n// CREATING BUTTONS\r\n//        button = new JButton();\r\n//        button.setBounds(100, 100, 300, 50);\r\n//        button.setSize(300, 50);\r\n//        button.addActionListener(this);\r\n//        button.setText(\"I'm a button!\");\r\n//        button.setFocusable(false);\r\n//        // button.setIcon(icon);\r\n//        button.setHorizontalTextPosition(JButton.CENTER);\r\n//        button.setVerticalTextPosition(JButton.BOTTOM);\r\n//        button.setFont(new Font(\"Gotham\", Font.BOLD, 25));\r\n//        button.setIconTextGap(35);\r\n//        button.setForeground(new Color(0x15399B));\r\n//        button.setBackground(Color.lightGray);\r\n//        button.setBorder(BorderFactory.createEtchedBorder());
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/ui/MyFrame.java b/src/main/ui/MyFrame.java
+--- a/src/main/ui/MyFrame.java	(revision 52cc0a2c13c142a194477e46f6f684bf00e6d170)
++++ b/src/main/ui/MyFrame.java	(date 1669322707924)
+@@ -8,6 +8,7 @@
+ import java.awt.*;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
++import java.io.File;
+ import java.io.FileNotFoundException;
+ import java.io.IOException;
+ 
+@@ -29,19 +30,24 @@
+         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close
+         this.setResizable(true);
+         this.setSize(1280, 720);
+-        this.setLayout(new GridLayout(3, 1, 10, 10));
++        this.setLayout(new GridBagLayout());
++        GridBagConstraints gbc = new GridBagConstraints();
++        gbc.insets = new Insets(10,10,10,10);
+         ImageIcon image = new ImageIcon("plane.png");
+         this.setIconImage(image.getImage());
+         this.getContentPane().setBackground(new Color(0xECECCA));
+ 
+         JLabel toplabel = addTopLabel();
+-        this.add(toplabel);
++        setGbc(gbc, 0,0);
++        this.add(toplabel, gbc);
+ 
+         JPanel centerPanel = addCenterPanel();
+-        this.add(centerPanel);
++        setGbc(gbc, 0,1);
++        this.add(centerPanel, gbc);
+ 
+         JLabel bottomLabel = addVisualComponent();
+-        this.add(bottomLabel);
++        setGbc(gbc, 0, 2);
++        this.add(bottomLabel, gbc);
+ 
+         this.setVisible(true);
+ 
+@@ -53,7 +59,17 @@
+         JLabel topLabel = new JLabel(); //create a label
+         topLabel.setText("Welcome to the epic travel destination database! Enjoy your stay!");
+         topLabel.setForeground(new Color(0x15399B)); //set font color of text
+-        topLabel.setFont(new Font("Gotham", Font.BOLD, 30));
++        Font gotham;
++        try {
++            gotham = Font.createFont(Font.TRUETYPE_FONT, new File("GothamBold.ttf")).deriveFont(30f);
++            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
++            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("GothamBold.ttf")));
++        } catch (FontFormatException e) {
++            throw new RuntimeException(e);
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
++        topLabel.setFont(gotham);
+         // label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
+         // label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
+         //label.setIconTextGap(10); //set gap of text to image
+@@ -71,43 +87,36 @@
+     // EFFECTS: adds the center panel with the buttons to the frame.
+     public JPanel addCenterPanel() {
+         JPanel mainPanel = new JPanel();
+-        mainPanel.setBackground(Color.lightGray);
+-        mainPanel.setLayout(new GridLayout(3, 2, 3, 3));
+-
+-        addButton = addButton("Add a destination");
+-        addButton.addActionListener(this);
+-        mainPanel.add(addButton);
+-
+-        viewButton = addButton("View your destinations");
+-        viewButton.addActionListener(this);
+-        mainPanel.add(viewButton);
+-
+-        loadButton = addButton("Load a database");
+-        mainPanel.add(loadButton);
+-        loadButton.addActionListener(this);
+-
+-        saveButton = addButton("Save your database");
+-        mainPanel.add(saveButton);
+-        saveButton.addActionListener(this);
+-
+-        favouriteButton = addButton("View your favourite destination");
+-        mainPanel.add(favouriteButton);
+-
+-        recommendedButton = addButton("View your recommended destinations");
+-        mainPanel.add(recommendedButton);
+-
+-        mainPanel.setPreferredSize(new Dimension(50, 50));
++        GridBagConstraints gbc = new GridBagConstraints();
++        mainPanel.setBackground(new Color(0xECECCA));
++        mainPanel.setLayout(new GridBagLayout());
++        addButton = addButton("Add", 0, 0, gbc, mainPanel);
++        viewButton = addButton("View", 1, 0, gbc, mainPanel);
++        loadButton = addButton("Load", 0, 1, gbc, mainPanel);
++        saveButton = addButton("Save", 1, 1, gbc, mainPanel);
++        favouriteButton = addButton("Favourite",3,0, gbc, mainPanel);
++        recommendedButton = addButton("Recommended",3,1, gbc, mainPanel);
++        //mainPanel.setPreferredSize(new Dimension(200, 200));
+         return mainPanel;
+     }
+ 
++    public GridBagConstraints setGbc(GridBagConstraints gbc, int x, int y) {
++        gbc.gridx = x;
++        gbc.gridy = y;
++        return gbc;
++    }
++
+     // EFFECTS: creates a generic button with font set to Gotham and size set to 20, 20 (x and y).
+-    public JButton addButton(String title) {
++    public JButton addButton(String title, int x, int y, GridBagConstraints gbc, JPanel mainPanel) {
+         JButton button = new JButton(title);
+-        button.setFont(new Font("Gotham", Font.BOLD, 25));
+-        button.setPreferredSize(new Dimension(20, 20));
++        button.setFont(new Font("Gotham", Font.BOLD, 15));
++        button.setPreferredSize(new Dimension(200, 50));
+         button.setBorder(BorderFactory.createEtchedBorder());
+         // button.setForeground(new Color(0x15399B));
+         button.setBackground(Color.lightGray);
++        button.addActionListener(this);
++        setGbc(gbc, x, y);
++        mainPanel.add(button, gbc);
+         return button;
+     }
+ 

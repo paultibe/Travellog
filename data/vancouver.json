@@ -1,0 +1,12 @@
+{
+    "database": [{
+        "continent": "north america",
+        "country": "canada",
+        "city": "vancouver",
+        "food rating": 2,
+        "cultural rating": 2,
+        "price rating": 2,
+        "recommend?": true
+    }],
+    "name": "vancouver"
+}

@@ -1,0 +1,122 @@
+{
+    "database": [
+        {
+            "continent": "North America",
+            "country": "Canada",
+            "city": "Vancouver",
+            "food rating": 6,
+            "cultural rating": 5,
+            "price rating": 2,
+            "recommend?": false
+        },
+        {
+            "continent": "Europe",
+            "country": "Spain",
+            "city": "Madrid",
+            "food rating": 10,
+            "cultural rating": 10,
+            "price rating": 10,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Czech Republic",
+            "city": "Prague",
+            "food rating": 7,
+            "cultural rating": 8,
+            "price rating": 8,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Germany",
+            "city": "Berlin",
+            "food rating": 9,
+            "cultural rating": 9,
+            "price rating": 7,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Italy",
+            "city": "Lisbon",
+            "food rating": 10,
+            "cultural rating": 10,
+            "price rating": 10,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Crotia",
+            "city": "Dubrovnik",
+            "food rating": 7,
+            "cultural rating": 7,
+            "price rating": 7,
+            "recommend?": false
+        },
+        {
+            "continent": "Europe",
+            "country": "Portugal",
+            "city": "Lisbon",
+            "food rating": 10,
+            "cultural rating": 10,
+            "price rating": 10,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Spain",
+            "city": "Barcelona",
+            "food rating": 7,
+            "cultural rating": 7,
+            "price rating": 10,
+            "recommend?": true
+        },
+        {
+            "continent": "South America",
+            "country": "Costa Rica",
+            "city": "San Jose",
+            "food rating": 7,
+            "cultural rating": 8,
+            "price rating": 8,
+            "recommend?": false
+        },
+        {
+            "continent": "Asia",
+            "country": "South Korea",
+            "city": "Seoul",
+            "food rating": 6,
+            "cultural rating": 7,
+            "price rating": 8,
+            "recommend?": false
+        },
+        {
+            "continent": "Asia",
+            "country": "Cambodia",
+            "city": "Phnom Penh",
+            "food rating": 5,
+            "cultural rating": 9,
+            "price rating": 10,
+            "recommend?": true
+        },
+        {
+            "continent": "Europe",
+            "country": "Switzerland",
+            "city": "Geneva",
+            "food rating": 9,
+            "cultural rating": 5,
+            "price rating": 3,
+            "recommend?": true
+        },
+        {
+            "continent": "Oceania",
+            "country": "New Zealand",
+            "city": "Wellington",
+            "food rating": 10,
+            "cultural rating": 10,
+            "price rating": 10,
+            "recommend?": true
+        }
+    ],
+    "name": "SummerDestinations"
+}
