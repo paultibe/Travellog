@@ -58,7 +58,7 @@ public class MyFrame extends JFrame implements ActionListener {
     public JLabel addTopLabel() {
         JLabel topLabel = new JLabel(); //create a label
         topLabel.setText("Welcome to the epic travel destination database! Enjoy your stay!");
-        topLabel.setForeground(new Color(0x15399B)); //set font color of text
+        topLabel.setForeground(new Color(0x0E5E6F)); //set font color of text
         Font gotham;
         try {
             gotham = Font.createFont(Font.TRUETYPE_FONT, new File("GothamBold.ttf")).deriveFont(30f);
@@ -88,6 +88,7 @@ public class MyFrame extends JFrame implements ActionListener {
     public JPanel addCenterPanel() {
         JPanel mainPanel = new JPanel();
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5,5,5,5);
         mainPanel.setBackground(new Color(0xECECCA));
         mainPanel.setLayout(new GridBagLayout());
         addButton = addButton("Add", 0, 0, gbc, mainPanel);
@@ -112,8 +113,8 @@ public class MyFrame extends JFrame implements ActionListener {
         button.setFont(new Font("Gotham", Font.BOLD, 15));
         button.setPreferredSize(new Dimension(200, 50));
         button.setBorder(BorderFactory.createEtchedBorder());
-        // button.setForeground(new Color(0x15399B));
-        button.setBackground(Color.lightGray);
+        button.setForeground(new Color(0xF2DEBA));
+        button.setBackground(new Color(0x0E5E6F));
         button.addActionListener(this);
         setGbc(gbc, x, y);
         mainPanel.add(button, gbc);
@@ -125,7 +126,7 @@ public class MyFrame extends JFrame implements ActionListener {
     public JLabel addVisualComponent() {
         JLabel label = new JLabel(); //create a label
         label.setText("Suggested future travel destination, based on our users' favourite destinations: Madrid, Spain");
-        label.setForeground(new Color(0x15399B)); //set font color of text
+        label.setForeground(new Color(0x0E5E6F)); //set font color of text
         label.setFont(new Font("Gotham", Font.BOLD, 15));
 
         ImageIcon madrid = new ImageIcon("Madrid.jpeg");
