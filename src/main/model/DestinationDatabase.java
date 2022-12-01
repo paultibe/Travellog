@@ -27,6 +27,8 @@ public class DestinationDatabase implements Writable {
     // EFFECTS: sets name of database.
     public void setName(String name) {
         this.name = name;
+        EventLog.getInstance().logEvent(new Event("Updated database name to: " + name));
+
     }
 
     // REQUIRES: foodRating, culturalRating, and priceRating >= 0
@@ -34,6 +36,7 @@ public class DestinationDatabase implements Writable {
     // EFFECTS: adds a new travel destination to the database
     public void addDestination(TravelDestination td) {
         this.database.add(td);
+        EventLog.getInstance().logEvent(new Event("New destination added: " + td.getCityName()));
     }
 
     // EFFECTS: returns city name of destination with top combined rating
@@ -53,6 +56,7 @@ public class DestinationDatabase implements Writable {
             } else if (temp == topRating) {
                 result.add(d.getCityName());
             }
+            EventLog.getInstance().logEvent(new Event("Found favourite destination: " + d.getCityName()));
         }
         return result;
 
@@ -70,6 +74,8 @@ public class DestinationDatabase implements Writable {
             } else if (d.getFoodRating() == topRating) {
                 result.add(d.getCityName());
             }
+            EventLog.getInstance().logEvent(new Event("Found top rated destination for food: "
+                    + d.getCityName()));
         }
         return result;
     }
@@ -112,6 +118,7 @@ public class DestinationDatabase implements Writable {
         for (TravelDestination d : database) {
             result.add(d.getCityName());
         }
+        EventLog.getInstance().logEvent(new Event("Printed database"));
         return result;
     }
 

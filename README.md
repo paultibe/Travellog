@@ -56,7 +56,20 @@ share with my friends and family as well.
 - You can reload the state of my application by clicking the "Load a Database" button and entering the name of your
   - database in the pop-up pane and clicking "ok".
 
+# Phase 4: Task 2
+- Thu Dec 01 14:18:26 PST 2022
+  New destination added: Niger
+  Thu Dec 01 14:18:29 PST 2022
+  Printed database
+  Thu Dec 01 14:18:53 PST 2022
+  New destination added: Pretoria
+  Thu Dec 01 14:20:21 PST 2022
+  New destination added: Santiago
+  Thu Dec 01 14:20:22 PST 2022
+  Printed database
 
-where to find the visual component that was added to your project (e.g., background image, image added to button)
-how does the user save the state of the application to file
-how does the user load the state of the application from file
+# Phase 4: Task 3
+- Identify any changes in the design of your program you would make if you had more time. (ie. changing how print data
+- base works)
+- name it UML_Design_Diagram.pdf
+

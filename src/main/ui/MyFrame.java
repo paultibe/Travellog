@@ -1,6 +1,8 @@
 package ui;
 
 import model.DestinationDatabase;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -27,7 +29,7 @@ public class MyFrame extends JFrame implements ActionListener {
         database = new DestinationDatabase("Name");
 
         this.setTitle("Destination Database Application!");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close
         this.setResizable(true);
         this.setSize(1280, 720);
         this.setLayout(new GridBagLayout());
@@ -52,6 +54,16 @@ public class MyFrame extends JFrame implements ActionListener {
         this.setVisible(true);
 
     }
+
+    @Override
+    public void dispose() {
+        EventLog el = EventLog.getInstance();
+        for (Event next: el) {
+            System.out.println(next);
+        }
+        super.dispose();
+    }
+
     // MODIFIES: this
     // EFFECTS: Adds the top, introductory string of text to the frame.
 
