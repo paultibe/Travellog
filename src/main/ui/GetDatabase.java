@@ -16,15 +16,16 @@ public class GetDatabase {
 
         this.database = database;
 
-        frame.setSize(600, 400);
+        frame.setSize(300, 600);
         frame.setLayout(new GridLayout(8, 1, 10, 10));
         List<String> allDestinations = database.getDatabase();
         for (String s : allDestinations) {
             JButton button = new JButton(s);
             button.setFont(new Font("Gotham", Font.BOLD, 15));
-            button.setPreferredSize(new Dimension(100, 50));
+            button.setPreferredSize(new Dimension(100, 30));
             button.setForeground(new Color(0xF2DEBA));
             button.setBackground(new Color(0x0E5E6F));
+            button.setBorder(new RoundedBorder(10));
             frame.add(button);
         }
         frame.setVisible(true);
