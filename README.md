@@ -69,7 +69,13 @@ share with my friends and family as well.
   Printed database
 
 # Phase 4: Task 3
-- Identify any changes in the design of your program you would make if you had more time. (ie. changing how print data
-- base works)
-- name it UML_Design_Diagram.pdf
+- Identify any changes in the design of your program you would make if you had more time. Mention any refactoring you would do.
+- If I had more time, I would:
+  - Change the functionality of the getDatabase method in DestinationDatabase to return a list of TravelDestinations
+    instead of a list of Strings. This would change the functionality of the GetDatabase class, which would print out
+    on screen all of the information about destinations entered in the database instead of just the city names.
+  - Move the declaration of the TravelDestination field in AddDestination to the actionPerformed method with its
+    instantiation to decrease coupling. 
+  - Increase cohesion of the MyFrame class by converting the methods that add the different components of the GUI
+    onto the frame into separate classes (ie. make new classes for addTopLabel, addCenterPanel, addVisualComponent)
 
