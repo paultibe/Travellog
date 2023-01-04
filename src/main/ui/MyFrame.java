@@ -37,19 +37,23 @@ public class MyFrame extends JFrame implements ActionListener {
         gbc.insets = new Insets(10,10,10,10);
         ImageIcon image = new ImageIcon("plane.png");
         this.setIconImage(image.getImage());
-        this.getContentPane().setBackground(new Color(0xECECCA));
+        this.getContentPane().setBackground(new Color(0x2c3048));
 
-        JLabel toplabel = addTopLabel();
+        JLabel topImage = addTopImage();
         setGbc(gbc, 0,0);
-        this.add(toplabel, gbc);
+        this.add(topImage, gbc);
+
+        JLabel topLabel = addTopLabel();
+        setGbc(gbc, 0,1);
+        this.add(topLabel, gbc);
 
         JPanel centerPanel = addCenterPanel();
-        setGbc(gbc, 0,1);
+        setGbc(gbc, 0,2);
         this.add(centerPanel, gbc);
 
-        JLabel bottomLabel = addVisualComponent();
-        setGbc(gbc, 0, 2);
-        this.add(bottomLabel, gbc);
+//        JLabel bottomLabel = addVisualComponent();
+//        setGbc(gbc, 0, 2);
+//        this.add(bottomLabel, gbc);
 
         this.setVisible(true);
 
@@ -67,10 +71,22 @@ public class MyFrame extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: Adds the top, introductory string of text to the frame.
 
+    public JLabel addTopImage() {
+        JLabel label = new JLabel();
+        ImageIcon travellog = new ImageIcon("travellog.png");
+        Image newimg = travellog.getImage().getScaledInstance(1162, 550, Image.SCALE_SMOOTH);
+        Image newimg2 = travellog.getImage().getScaledInstance(581, 277, Image.SCALE_SMOOTH);
+        travellog = new ImageIcon(newimg2);  // transform it back
+
+        label.setIcon(travellog);
+        return label;
+    }
+
+
     public JLabel addTopLabel() {
-        JLabel topLabel = new JLabel(); //create a label
-        topLabel.setText("Welcome to the epic travel destination database! Enjoy your stay!");
-        topLabel.setForeground(new Color(0x0E5E6F)); //set font color of text
+        JLabel topLabel = new JLabel();
+        topLabel.setText("Save where you've been, made easy");
+        topLabel.setForeground(new Color(0xa6d2d7)); //set font color of text
         Font gotham;
         try {
             gotham = Font.createFont(Font.TRUETYPE_FONT, new File("GothamBold.ttf")).deriveFont(30f);
@@ -88,8 +104,8 @@ public class MyFrame extends JFrame implements ActionListener {
         // label.setBackground(new Color(0xC27A34)); //set background color
         // label.setOpaque(true); //display background color
         //label.setBorder(border); //sets border of label (not image+text)
-        topLabel.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
-        topLabel.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
+        //topLabel.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
+        //topLabel.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
         //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions
         return topLabel;
 
@@ -101,7 +117,7 @@ public class MyFrame extends JFrame implements ActionListener {
         JPanel mainPanel = new JPanel();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5,5,5,5);
-        mainPanel.setBackground(new Color(0xECECCA));
+        mainPanel.setBackground(new Color(0xA6D2D7));
         mainPanel.setLayout(new GridBagLayout());
         addButton = addButton("Add", 0, 0, gbc, mainPanel);
         viewButton = addButton("View", 1, 0, gbc, mainPanel);
@@ -125,8 +141,8 @@ public class MyFrame extends JFrame implements ActionListener {
         button.setFont(new Font("Gotham", Font.BOLD, 15));
         button.setPreferredSize(new Dimension(200, 50));
         button.setBorder(BorderFactory.createEtchedBorder());
-        button.setForeground(new Color(0xF2DEBA));
-        button.setBackground(new Color(0x0E5E6F));
+        button.setForeground(new Color(0xA6D2D7));
+        button.setBackground(new Color(0x2C3048));
         button.addActionListener(this);
         setGbc(gbc, x, y);
         mainPanel.add(button, gbc);
@@ -135,30 +151,30 @@ public class MyFrame extends JFrame implements ActionListener {
 
     //MODIFIES: this
     //EFFECTS: adds the recommended destinations to the bottom of frame.
-    public JLabel addVisualComponent() {
-        JLabel label = new JLabel(); //create a label
-        label.setText("Suggested future travel destination, based on our users' favourite destinations: Madrid, Spain");
-        label.setForeground(new Color(0x0E5E6F)); //set font color of text
-        label.setFont(new Font("Gotham", Font.BOLD, 15));
-
-        ImageIcon madrid = new ImageIcon("Madrid.jpeg");
-        Image transformed = madrid.getImage(); // transform it
-        Image newimg = transformed.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
-        // scale it the smooth way
-        madrid = new ImageIcon(newimg);  // transform it back
-
-        label.setIcon(madrid);
-        label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
-        label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
-        label.setIconTextGap(10); //set gap of text to image
-        // label.setBackground(new Color(0xC27A34)); //set background color
-        // label.setOpaque(true); //display background color
-        //label.setBorder(border); //sets border of label (not image+text)
-        label.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
-        label.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
-        //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions
-        return label;
-    }
+//    public JLabel addVisualComponent() {
+//        JLabel label = new JLabel(); //create a label
+//        label.setText("Suggested future travel destination, based on our users' favourite destinations: Madrid, Spain");
+//        label.setForeground(new Color(0x0E5E6F)); //set font color of text
+//        label.setFont(new Font("Gotham", Font.BOLD, 15));
+//
+//        ImageIcon madrid = new ImageIcon("Madrid.jpeg");
+//        Image transformed = madrid.getImage(); // transform it
+//        Image newimg = transformed.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+//        // scale it the smooth way
+//        madrid = new ImageIcon(newimg);  // transform it back
+//
+//        label.setIcon(madrid);
+//        label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
+//        label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
+//        label.setIconTextGap(10); //set gap of text to image
+//        // label.setBackground(new Color(0xC27A34)); //set background color
+//        // label.setOpaque(true); //display background color
+//        //label.setBorder(border); //sets border of label (not image+text)
+//        label.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
+//        label.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
+//        //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions
+//        return label;
+//    }
 
     // EFFECTS: determines which action to do depending on which button is clicked.
     @Override
