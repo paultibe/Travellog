@@ -2,6 +2,10 @@ package ui;
 
 import model.DestinationDatabase;
 import model.TravelDestination;
+import model.exceptions.CultureOutOfRangeException;
+import model.exceptions.FoodOutOfRangeException;
+import model.exceptions.NotBooleanException;
+import model.exceptions.PriceOutOfRangeException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +23,7 @@ public class AddDestination implements ActionListener {
     JLabel foodRatingLabel = new JLabel("Food rating (0-10): ");
     JLabel culturalRatingLabel = new JLabel("Culture rating (0-10): ");
     JLabel priceRatingLabel = new JLabel("Price rating (0-10): ");
-    JLabel recommendOrNotLabel = new JLabel("Recommend? (true/false)");
+    JLabel recommendOrNotLabel = new JLabel("Recommend? (yes/no)");
     JTextField enterCity = new JTextField();
     JTextField enterCountry = new JTextField();
     JTextField enterContinent = new JTextField();
@@ -75,28 +79,77 @@ public class AddDestination implements ActionListener {
         return label;
     }
 
-
-
+    // this is where you throw exceptions
+    // each textfield you want to restrict input data for, have a while loop that throws an exception
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
             String city = enterCity.getText();
             String country = enterCountry.getText();
             String continent = enterContinent.getText();
-            double foodRating = Double.parseDouble(enterFoodRating.getText());
-            double culturalRating = Double.parseDouble(enterCulturalRating.getText());
-            double priceRating = Double.parseDouble(enterPriceRating.getText());
-            boolean recommendOrNot = Boolean.parseBoolean(enterRecommendOrNot.getText());
-            newDestination = new TravelDestination(city, country, continent,
-                    foodRating, culturalRating, priceRating, recommendOrNot);
-            this.database.addDestination(newDestination);
-            JOptionPane.showMessageDialog(null,
-                    "Great! Adding your travel destination to the database...");
-            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            double foodRating;
+            double culturalRating;
+            double priceRating;
+            boolean recommendOrNot;
+            try {
+                foodRating = getFoodRating(Double.parseDouble(enterFoodRating.getText()));
+                culturalRating = getCultureRating(Double.parseDouble(enterCulturalRating.getText()));
+                priceRating = getPriceRating(Double.parseDouble(enterPriceRating.getText()));
+                recommendOrNot = parseRecommend();
+
+                newDestination = new TravelDestination(city, country, continent,
+                        foodRating, culturalRating, priceRating, recommendOrNot);
+                this.database.addDestination(newDestination);
+                JOptionPane.showMessageDialog(null,
+                        "Great! Adding your travel destination to the database...");
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            } catch (FoodOutOfRangeException re) {
+                JOptionPane.showMessageDialog(null,
+                        "Please enter a food rating between 0 and 10!");
+            } catch (CultureOutOfRangeException re) {
+                JOptionPane.showMessageDialog(null,
+                        "Please enter a culture rating between 0 and 10!");
+            } catch (PriceOutOfRangeException re) {
+                JOptionPane.showMessageDialog(null,
+                        "Please enter a price rating between 0 and 10!");
+            } catch (NotBooleanException be) {
+                JOptionPane.showMessageDialog(null,
+                        "Please enter a recommendation of yes or no!");
+            }
         }
+    }
+
+    public double getFoodRating(double rating) throws FoodOutOfRangeException {
+        while (!(0 <= rating && rating <= 10)) {
+            throw new FoodOutOfRangeException();
+        }
+        return rating;
+    }
+
+    public double getCultureRating(double rating) throws CultureOutOfRangeException {
+        while (!(0 <= rating && rating <= 10)) {
+            throw new CultureOutOfRangeException();
+        }
+        return rating;
+    }
+
+    public double getPriceRating(double rating) throws PriceOutOfRangeException {
+        while (!(0 <= rating && rating <= 10)) {
+            throw new PriceOutOfRangeException();
+        }
+        return rating;
+    }
+
+    public boolean parseRecommend() throws NotBooleanException {
+        boolean recommend;
+        if (enterRecommendOrNot.getText().equals("yes") || enterRecommendOrNot.getText().equals("Yes")) {
+            recommend = true;
+        } else if (enterRecommendOrNot.getText().equals("no") || enterRecommendOrNot.getText().equals("No")) {
+            recommend = false;
+        } else {
+            throw new NotBooleanException();
+        }
+        return recommend;
     }
 }
 
-//    public TravelDestination getTravelDestination() {
-//        return newDestination;
-//    }
