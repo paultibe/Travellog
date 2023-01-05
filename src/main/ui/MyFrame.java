@@ -123,8 +123,8 @@ public class MyFrame extends JFrame implements ActionListener {
         viewButton = addButton("View", 1, 0, gbc, mainPanel);
         loadButton = addButton("Load", 0, 1, gbc, mainPanel);
         saveButton = addButton("Save", 1, 1, gbc, mainPanel);
-        favouriteButton = addButton("Favourite",3,0, gbc, mainPanel);
-        recommendedButton = addButton("Recommended",3,1, gbc, mainPanel);
+        favouriteButton = addButton("Find",3,0, gbc, mainPanel);
+        recommendedButton = addButton("Rate",3,1, gbc, mainPanel);
         //mainPanel.setPreferredSize(new Dimension(200, 200));
         return mainPanel;
     }
