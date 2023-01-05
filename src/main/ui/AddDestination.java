@@ -13,13 +13,13 @@ import java.awt.event.WindowEvent;
 public class AddDestination implements ActionListener {
 
     JFrame frame = new JFrame();
-    JLabel cityLabel = new JLabel("Enter city name: ");
-    JLabel countryLabel = new JLabel("Enter country name: ");
-    JLabel continentLabel = new JLabel("Enter continent name: ");
-    JLabel foodRatingLabel = new JLabel("How would you rate the food? (0-10)");
-    JLabel culturalRatingLabel = new JLabel("How would you rate the culture? (0-10)");
-    JLabel priceRatingLabel = new JLabel("How would you rate the price? (0-10)");
-    JLabel recommendOrNotLabel = new JLabel("Would you recommend it? (true/false)");
+    JLabel cityLabel = new JLabel("City name: ");
+    JLabel countryLabel = new JLabel("Country name: ");
+    JLabel continentLabel = new JLabel("Continent name: ");
+    JLabel foodRatingLabel = new JLabel("Food rating (0-10): ");
+    JLabel culturalRatingLabel = new JLabel("Culture rating (0-10): ");
+    JLabel priceRatingLabel = new JLabel("Price rating (0-10): ");
+    JLabel recommendOrNotLabel = new JLabel("Recommend? (true/false)");
     JTextField enterCity = new JTextField();
     JTextField enterCountry = new JTextField();
     JTextField enterContinent = new JTextField();
@@ -37,26 +37,45 @@ public class AddDestination implements ActionListener {
 
         frame.setSize(600, 400);
         frame.setLayout(new GridLayout(8, 2, 10, 10));
+        ImageIcon image = new ImageIcon("plane.png");
+        frame.setIconImage(image.getImage());
+        frame.getContentPane().setBackground(new Color(0x2c3048));
 
-        frame.add(cityLabel);
+        frame.add(addLabel(cityLabel));
         frame.add(enterCity);
-        frame.add(countryLabel);
+        frame.add(addLabel(countryLabel));
         frame.add(enterCountry);
-        frame.add(continentLabel);
+        frame.add(addLabel(continentLabel));
         frame.add(enterContinent);
-        frame.add(foodRatingLabel);
+        frame.add(addLabel(foodRatingLabel));
         frame.add(enterFoodRating);
-        frame.add(culturalRatingLabel);
+        frame.add(addLabel(culturalRatingLabel));
         frame.add(enterCulturalRating);
-        frame.add(priceRatingLabel);
+        frame.add(addLabel(priceRatingLabel));
         frame.add(enterPriceRating);
-        frame.add(recommendOrNotLabel);
+        frame.add(addLabel(recommendOrNotLabel));
         frame.add(enterRecommendOrNot);
-        frame.add(button);
+        frame.add(new JLabel(""));
+        frame.add(addButton(button));
         button.addActionListener(this);
 
         frame.setVisible(true);
     }
+
+    public JButton addButton(JButton button) {
+        button.setFont(new Font("Gotham", Font.BOLD, 15));
+        button.setBackground(new Color(0xA6D2D7));
+        button.setForeground(new Color(0x2C3048));
+        return button;
+    }
+
+    public JLabel addLabel(JLabel label) {
+        label.setForeground(new Color(0xa6d2d7));
+        label.setFont(new Font("Gotham", Font.BOLD, 15));
+        return label;
+    }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

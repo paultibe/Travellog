@@ -5,7 +5,6 @@ import model.DestinationDatabase;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-// add submit button with an action listener. This action listener creates the new TravelDestination with all the input
 
 public class GetDatabase {
 
@@ -17,15 +16,19 @@ public class GetDatabase {
         this.database = database;
 
         frame.setSize(300, 600);
-        frame.setLayout(new GridLayout(8, 1, 10, 10));
+        frame.setLayout(new GridLayout(7, 1, 10, 10));
+        ImageIcon image = new ImageIcon("plane.png");
+        frame.setIconImage(image.getImage());
+        frame.getContentPane().setBackground(new Color(0xA6D2D7));
+
         List<String> allDestinations = database.getDatabase();
         for (String s : allDestinations) {
             JButton button = new JButton(s);
             button.setFont(new Font("Gotham", Font.BOLD, 15));
             button.setPreferredSize(new Dimension(100, 30));
-            button.setForeground(new Color(0xF2DEBA));
-            button.setBackground(new Color(0x0E5E6F));
-            button.setBorder(new RoundedBorder(10));
+            button.setBackground(new Color(0x2C3048));
+            button.setForeground(new Color(0xA6D2D7));
+            //button.setBorder(new RoundedBorder(10));
             frame.add(button);
         }
         frame.setVisible(true);

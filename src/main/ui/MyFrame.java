@@ -21,8 +21,8 @@ public class MyFrame extends JFrame implements ActionListener {
     JButton viewButton;
     JButton saveButton;
     JButton loadButton;
-    JButton favouriteButton;
-    JButton recommendedButton;
+    JButton findButton;
+    JButton rateButton;
 
     MyFrame() {
 
@@ -69,7 +69,7 @@ public class MyFrame extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Adds the top, introductory string of text to the frame.
+    // EFFECTS: Adds the logo to the frame.
 
     public JLabel addTopImage() {
         JLabel label = new JLabel();
@@ -82,6 +82,8 @@ public class MyFrame extends JFrame implements ActionListener {
         return label;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds the top, introductory string of text to the frame.
 
     public JLabel addTopLabel() {
         JLabel topLabel = new JLabel();
@@ -98,15 +100,6 @@ public class MyFrame extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
         topLabel.setFont(gotham);
-        // label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
-        // label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
-        //label.setIconTextGap(10); //set gap of text to image
-        // label.setBackground(new Color(0xC27A34)); //set background color
-        // label.setOpaque(true); //display background color
-        //label.setBorder(border); //sets border of label (not image+text)
-        //topLabel.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
-        //topLabel.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
-        //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions
         return topLabel;
 
     }
@@ -123,8 +116,8 @@ public class MyFrame extends JFrame implements ActionListener {
         viewButton = addButton("View", 1, 0, gbc, mainPanel);
         loadButton = addButton("Load", 0, 1, gbc, mainPanel);
         saveButton = addButton("Save", 1, 1, gbc, mainPanel);
-        favouriteButton = addButton("Find",3,0, gbc, mainPanel);
-        recommendedButton = addButton("Rate",3,1, gbc, mainPanel);
+        findButton = addButton("Find",3,0, gbc, mainPanel);
+        rateButton = addButton("Rate",3,1, gbc, mainPanel);
         //mainPanel.setPreferredSize(new Dimension(200, 200));
         return mainPanel;
     }
@@ -153,7 +146,8 @@ public class MyFrame extends JFrame implements ActionListener {
     //EFFECTS: adds the recommended destinations to the bottom of frame.
 //    public JLabel addVisualComponent() {
 //        JLabel label = new JLabel(); //create a label
-//        label.setText("Suggested future travel destination, based on our users' favourite destinations: Madrid, Spain");
+//        label.setText("Suggested future travel destination,
+//        based on our users' favourite destinations: Madrid, Spain");
 //        label.setForeground(new Color(0x0E5E6F)); //set font color of text
 //        label.setFont(new Font("Gotham", Font.BOLD, 15));
 //
@@ -187,7 +181,23 @@ public class MyFrame extends JFrame implements ActionListener {
             saveDatabase();
         } else if (e.getSource() == loadButton) {
             loadDatabase();
+        } else if (e.getSource() == findButton) {
+            doFind();
+        } else if (e.getSource() == rateButton) {
+            doRate();
         }
+    }
+
+    private void doFind() {
+        Find myFind = new Find(this.database);
+    }
+
+    // MODIFIES: database
+    // EFFECTS: Creates a new pop-up window that prompts to user to leave a rating.
+    private void doRate() {
+        String filename = JOptionPane.showInputDialog("How would you rate Travellog? (1-10)");
+        JOptionPane.showMessageDialog(this,
+                "Your feedback is greatly appreciated!");
     }
 
     // MODIFIES: database
@@ -203,10 +213,13 @@ public class MyFrame extends JFrame implements ActionListener {
 
     // EFFECTS: saves the database to file
     private void saveDatabase() {
-        String filename2 = JOptionPane.showInputDialog("What is your database's name?: ");
-        database.setName(filename2);
-        String jsonStore = "./data/" + filename2 + ".json";
+        String jsonStore;
         try {
+            String filename = JOptionPane.showInputDialog("What is your database's name?: ");
+            String filename2 = filename.replace(" ","");
+            database.setName(filename2);
+            jsonStore = "./data/" + filename2 + ".json";
+
             JsonWriter jsonWriter = new JsonWriter(jsonStore);
             jsonWriter.open();
             jsonWriter.write(database);
@@ -214,24 +227,30 @@ public class MyFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this,
                     "Saved " + database.getName() + " to " + jsonStore);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + jsonStore);
+            System.out.println("Unable to write to file");
+        } catch (NullPointerException e) {
+            // all good
         }
     }
 
     // MODIFIES: database
     // EFFECTS: loads database from file
     private void loadDatabase() {
-        String filename = JOptionPane.showInputDialog("What is your database's name?: ");
-        String filename2 = filename.replace(" ","");
-        database.setName(filename2);
-        String jsonStore = "./data/" + filename2 + ".json";
+        String jsonStore;
         try {
+            String filename = JOptionPane.showInputDialog("What is your database's name?: ");
+            String filename2 = filename.replace(" ","");
+            database.setName(filename2);
+            jsonStore = "./data/" + filename2 + ".json";
+
             JsonReader jsonReader = new JsonReader(jsonStore);
             database = jsonReader.read();
             JOptionPane.showMessageDialog(this,
                     "Loaded " + database.getName() + " from " + jsonStore);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + jsonStore);
+            System.out.println("Unable to read from file");
+        } catch (NullPointerException e) {
+            // all good
         }
     }
 }
