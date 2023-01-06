@@ -3,6 +3,7 @@ package ui;
 import model.DestinationDatabase;
 import model.Event;
 import model.EventLog;
+import model.exceptions.RatingOutOfRangeException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -28,7 +29,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
         database = new DestinationDatabase("Name");
 
-        this.setTitle("Destination Database Application!");
+        this.setTitle("Travellog");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // as opposed to do_nothing_on_close and hide_on_close
         this.setResizable(true);
         this.setSize(1280, 720);
@@ -142,34 +143,6 @@ public class MyFrame extends JFrame implements ActionListener {
         return button;
     }
 
-    //MODIFIES: this
-    //EFFECTS: adds the recommended destinations to the bottom of frame.
-//    public JLabel addVisualComponent() {
-//        JLabel label = new JLabel(); //create a label
-//        label.setText("Suggested future travel destination,
-//        based on our users' favourite destinations: Madrid, Spain");
-//        label.setForeground(new Color(0x0E5E6F)); //set font color of text
-//        label.setFont(new Font("Gotham", Font.BOLD, 15));
-//
-//        ImageIcon madrid = new ImageIcon("Madrid.jpeg");
-//        Image transformed = madrid.getImage(); // transform it
-//        Image newimg = transformed.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
-//        // scale it the smooth way
-//        madrid = new ImageIcon(newimg);  // transform it back
-//
-//        label.setIcon(madrid);
-//        label.setHorizontalTextPosition(JLabel.CENTER); //set text LEFT,CENTER, RIGHT of imageicon
-//        label.setVerticalTextPosition(JLabel.TOP); //set text TOP,CENTER, BOTTOM of imageicon
-//        label.setIconTextGap(10); //set gap of text to image
-//        // label.setBackground(new Color(0xC27A34)); //set background color
-//        // label.setOpaque(true); //display background color
-//        //label.setBorder(border); //sets border of label (not image+text)
-//        label.setVerticalAlignment(JLabel.CENTER); //set vertical position of icon+text within label
-//        label.setHorizontalAlignment(JLabel.CENTER); //set horizontal position of icon+text within label
-//        //label.setBounds(350, 400, 600, 300); //set x,y position within frame as well as dimensions
-//        return label;
-//    }
-
     // EFFECTS: determines which action to do depending on which button is clicked.
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -195,9 +168,21 @@ public class MyFrame extends JFrame implements ActionListener {
     // MODIFIES: database
     // EFFECTS: Creates a new pop-up window that prompts to user to leave a rating.
     private void doRate() {
-        String filename = JOptionPane.showInputDialog("How would you rate Travellog? (1-10)");
-        JOptionPane.showMessageDialog(this,
-                "Your feedback is greatly appreciated!");
+        try {
+            String rating1 = JOptionPane.showInputDialog("How would you rate Travellog? (1-10)");
+            double rating2 = Double.parseDouble(rating1);
+            while (!(0 <= rating2 && rating2 <= 10)) {
+                throw new RatingOutOfRangeException();
+            }
+            JOptionPane.showMessageDialog(this,
+                    "Your feedback is greatly appreciated!");
+        } catch (RatingOutOfRangeException re) {
+            JOptionPane.showMessageDialog(null, "Please enter a rating between 0 and 10!");
+        } catch (NullPointerException e) {
+            // all good
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a rating from 1-10!");
+        }
     }
 
     // MODIFIES: database
@@ -254,19 +239,3 @@ public class MyFrame extends JFrame implements ActionListener {
         }
     }
 }
-
-// CREATING BUTTONS
-//        button = new JButton();
-//        button.setBounds(100, 100, 300, 50);
-//        button.setSize(300, 50);
-//        button.addActionListener(this);
-//        button.setText("I'm a button!");
-//        button.setFocusable(false);
-//        // button.setIcon(icon);
-//        button.setHorizontalTextPosition(JButton.CENTER);
-//        button.setVerticalTextPosition(JButton.BOTTOM);
-//        button.setFont(new Font("Gotham", Font.BOLD, 25));
-//        button.setIconTextGap(35);
-//        button.setForeground(new Color(0x15399B));
-//        button.setBackground(Color.lightGray);
-//        button.setBorder(BorderFactory.createEtchedBorder());
