@@ -48,11 +48,7 @@ public class DestinationDatabase implements Writable {
             if (temp > topRating) {
                 topRating = temp;
                 result.clear();
-                result.add(d.getCityName()); // call helper method here. manually convert all info about the
-                                             // travel destination into a string
-                                             // call all the getter methods, add them to a string with all the info
-                                             // add that to result. thus, you still return a list of strings
-                                             // but each string in the list returns a bunch of info as well
+                result.add(d.getCityName());
             } else if (temp == topRating) {
                 result.add(d.getCityName());
             }
@@ -81,7 +77,7 @@ public class DestinationDatabase implements Writable {
     }
 
     // EFFECTS: returns city name of destination with top cultural rating
-    public List<String> getTopCulturalRating() {
+    public List<String> getTopCultureRating() {
         List<String> result = new ArrayList<>();
         double topRating = 0;
         for (TravelDestination d : database) {

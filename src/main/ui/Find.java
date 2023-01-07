@@ -26,7 +26,7 @@ public class Find implements ActionListener {
         frame.setIconImage(image.getImage());
         frame.getContentPane().setBackground(new Color(0xA6D2D7));
         frame.setVisible(true);
-        overallButton = addButton("Top Overall");
+        overallButton = addButton("Top overall");
         foodButton = addButton("Top by food");
         cultureButton = addButton("Top by culture");
         priceButton = addButton("Top by price");
@@ -62,22 +62,35 @@ public class Find implements ActionListener {
     }
 
     private void doFindTopOverall() {
-        // copy code from app. need to handle nullpointerexception
-        // create new window with ALL INFO. light blue text on black background
-        // gridlayout, one column, one JLabel with "Your top overall travel destination is:" and other JLabel
-        // with
+        try {
+            TopOverall top = new TopOverall(database);
+        } catch (NullPointerException e) {
+            // all good
+        }
     }
 
     private void doFindTopFood() {
-
+        try {
+            TopByFood top = new TopByFood(database);
+        } catch (NullPointerException e) {
+            // all good
+        }
     }
 
     private void doFindTopCulture() {
-
+        try {
+            TopByCulture top = new TopByCulture(database);
+        } catch (NullPointerException e) {
+            // all good
+        }
     }
 
     private void doFindTopPrice() {
-
+        try {
+            TopByPrice top = new TopByPrice(database);
+        } catch (NullPointerException e) {
+            // all good
+        }
     }
 
 }

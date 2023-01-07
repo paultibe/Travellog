@@ -188,7 +188,7 @@ public class DestinationDatabaseApp {
 
     // EFFECTS: prints the top-rated travel destination in the database for culture.
     private void doGetFavouriteCulture() {
-        List<String> favourite = myDatabase.getTopCulturalRating();
+        List<String> favourite = myDatabase.getTopCultureRating();
         System.out.println("Your favourite travel destination for culture is: " + favourite);
     }
 
