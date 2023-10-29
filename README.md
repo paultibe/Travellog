@@ -1,7 +1,7 @@
 # My Personal Project
 
 ## Travellog: Save Where You've Been, Made Easy
-
+![Travellog](https://github.com/paultibe/Travellog/assets/121990596/b68c06c5-cabe-442f-a392-78e38a8f47e5)
 This program allows users to keep track of their travel destinations as well 
 as various information about them, such as city name, country name, continent name;
 food rating, cultural rating, price rating; whether they would recommend it to a friend
