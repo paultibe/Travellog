@@ -1,6 +1,6 @@
 # My Personal Project
 
-## Travellog : Save Where You've Been, Made Easy
+## Travellog: Save Where You've Been, Made Easy
 
 This program allows users to keep track of their travel destinations as well 
 as various information about them, such as city name, country name, continent name;
