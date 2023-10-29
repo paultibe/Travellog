@@ -33,7 +33,7 @@ share with my friends and family as well.
 - As a user, I want to be able to load travel destinations from a file into the database.
 
 ## A Few Reflections
-]- If I revisit this project in the future, I'd like to:
+- If I revisit this project in the future, I'd like to:
   - Change the functionality of the getDatabase method in DestinationDatabase to return a list of TravelDestinations
     instead of a list of Strings. This would change the functionality of the GetDatabase class, which would print out
     on screen all of the information about destinations entered in the database instead of just the city names.
