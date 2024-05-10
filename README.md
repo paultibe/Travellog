@@ -1,6 +1,4 @@
-# My Personal Project
-
-## Travellog: Save Where You've Been, Made Easy
+# Travellog: Save Where You've Been, Made Easy
 ![Travellog](https://github.com/paultibe/Travellog/assets/121990596/b68c06c5-cabe-442f-a392-78e38a8f47e5)
 This program allows users to keep track of their travel destinations as well 
 as various information about them, such as city name, country name, continent name;
@@ -12,12 +10,10 @@ and then asks which action they would like to perform. These actions include:
 - return the user's favourite destination based on the ratings in each category.
 - return the destination with the highest rating in a particular category
 
-Having three nationalities, I've travelled ever since I was a little kid. Travel has become
-a core part of my identity and is an expression of my curiosity and desire to get outside
-of my comfort zone. The diversity of human stories that I encounter while travelling is one
-of my greatest sources of inspiration. This project allowed me to apply my coding
-skills towards a program that I could actually use in the years to come, and that I could
-share with my friends and family as well.
+Having three nationalities, I've travelled ever since I was a little kid. Throughout the years,
+travel has become a core part of my identity and is an expression of my curiosity and desire to get outside
+of my comfort zone. This project enabled me to apply my coding skills towards a program that I could 
+actually use in the years to come, and that I could share with my friends and family as well.
 
 ## User Stories
 
